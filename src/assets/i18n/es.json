@@ -4,11 +4,9 @@
     "MANTENIMIENTO": {
       "PRINCIPAL": "Mantenimiento",
       "AYUDA_PUBLICA": "Ayuda Pública",
-      "ESTADOS": "Estados",
-      "CONTACTOS": "Contactos",
-      "CENTRO_GESTOR": "Centro Gestor"
+      "CONTACTOS": "Contactos"
     },
-    "AMBITO": "Conselleria de Hacienda y Modelo Económico"
+    "AMBITO": "Modelo de un sistema de ventas"
   },
   "LANG": {
     "TITLE": "Idioma",

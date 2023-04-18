@@ -2,19 +2,17 @@
   "TITLE": "SISTEMA-VENTA",
   "MENU": {
     "MANTENIMIENTO": {
-      "PRINCIPAL": "Mantenimiento",
-      "AYUDA_PUBLICA": "Ayuda Pública",
-      "ESTADOS": "Estados",
-      "CONTACTOS": "Contactos",
-      "CENTRO_GESTOR": "Centro Gestor"
+      "PRINCIPAL": "Maintenance",
+      "AYUDA_PUBLICA": "Public Aid",
+      "CONTACTOS": "Contacts"
     },
-    "AMBITO": "Conselleria de Hacienda y Modelo Económico"
+    "AMBITO": "Model of a sales system"
   },
   "LANG": {
-    "TITLE": "Idioma",
+    "TITLE": "Language",
     "MANUAL": "Manual",
-    "M_USER": "Manual de usuario",
-    "M_INC": "Manual de incidencias",
+    "M_USER": "User manual",
+    "M_INC": "Incident manual",
     "EN": "Inglés",
     "ES": "Castellano"
   }

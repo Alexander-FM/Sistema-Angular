@@ -9,11 +9,11 @@ import { AppComponent } from './app.component';
 import {
   MatButtonModule,
   MatCardModule,
-  MatIconModule,
   MatListModule,
   MatMenuModule,
   MatSidenavModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatIconModule
 } from '@angular/material';
 import { MenuComponent } from './components/menu/menu.component';
 import {CoreModule} from './core/core.module';

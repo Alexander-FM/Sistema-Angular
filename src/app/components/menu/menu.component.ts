@@ -11,7 +11,8 @@ import {environment} from '../../../environments/environment';
 export class MenuComponent extends AbstractComponent {
   langs: string[] = environment.langs;
 
-  constructor(private translate: TranslateService) { super(translate); }
+  constructor(private translate: TranslateService) { super(translate);     this.translate.setDefaultLang('es');
+  }
 
   clearSessionStorage() {
     sessionStorage.clear();
