@@ -13,6 +13,7 @@ import {
   MatMenuModule,
   MatSidenavModule,
   MatToolbarModule,
+  MatSnackBarModule,
   MatIconModule
 } from '@angular/material';
 import { MenuComponent } from './components/menu/menu.component';
@@ -39,6 +40,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatButtonModule,
     FlexLayoutModule,
     MatIconModule,
+    MatSnackBarModule
   ],
   providers: [
   ],
