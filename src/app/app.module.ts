@@ -6,16 +6,8 @@ registerLocaleData(localeEs, 'es');
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatListModule,
-  MatMenuModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  MatSnackBarModule,
-  MatIconModule
-} from '@angular/material';
+// tslint:disable-next-line:max-line-length
+import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatSnackBarModule} from '@angular/material';
 import { MenuComponent } from './components/menu/menu.component';
 import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './app-routing.module';
