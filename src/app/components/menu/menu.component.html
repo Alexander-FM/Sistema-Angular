@@ -1,0 +1,127 @@
+<div class="container-header">
+  <mat-toolbar class="header">
+    <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <a href="https://www.gva.es/va/inicio/presentacion" target="_blank">
+      <img src="assets/images/logo.png" height="50">
+    </a>
+    <div class="linea-roja-separacion"></div>
+    <span>
+      <img src="assets/images/logo.png" height="40">
+    </span>
+    <div class="width-0-5em"></div>
+    <span fxShow="true" fxFlex class="two-lines">
+      Fondo Europeo de Desarrollo Regional - Una manera de hacer Europa<br />
+      Fons Europeu de Desenvolupament Regional - Una manera de fer Europa
+    </span>
+    <div fxFlex class="header-app-nom" fxHide.lt-md>
+      <a href="/"> {{ 'TITLE' | translate }}</a>
+    </div>
+    <span fxShow="true" fxHide.lt-md fxFlex class="ambito-header">
+      {{ 'MENU.AMBITO' | translate }}
+    </span>
+  </mat-toolbar>
+</div>
+<!-- Menú horizontal -->
+<mat-toolbar fxShow="true" fxHide.lt-md class="menu-horizontal container">
+  <mat-nav-list fxLayout="row">
+    <a mat-list-item (click)="clearSessionStorage()" routerLink="/ayuda-publica" routerLinkActive="menu-activo"
+       [routerLinkActiveOptions]="{ exact: true }">{{ 'MENU.MANTENIMIENTO.AYUDA_PUBLICA' | translate }}</a>
+    <mat-action-list>
+      <mat-list-item [matMenuTriggerFor]="mantenimientoMenu">
+        {{ 'MENU.MANTENIMIENTO.PRINCIPAL' | translate }}
+      </mat-list-item>
+      <mat-menu #mantenimientoMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="clearSessionStorage()"
+                routerLink="/contactos">{{ 'MENU.MANTENIMIENTO.CONTACTOS' | translate }}</button>
+        <button mat-menu-item (click)="clearSessionStorage()"
+                routerLink="/estados">{{ 'MENU.MANTENIMIENTO.ESTADOS' | translate }}</button>
+        <button mat-menu-item (click)="clearSessionStorage()"
+                routerLink="/centro-gestor">{{ 'MENU.MANTENIMIENTO.CENTRO_GESTOR' | translate }}</button>
+      </mat-menu>
+    </mat-action-list>
+
+  </mat-nav-list>
+  <span flex class="width-inherit"></span>
+
+  <mat-action-list>
+    <mat-list-item [matMenuTriggerFor]="manualMenu">
+      {{ 'LANG.MANUAL' | translate }} <mat-icon class="icono-idioma">format_align_justify </mat-icon>
+    </mat-list-item>
+    <mat-menu #manualMenu="matMenu" xPosition="before">
+      <button mat-menu-item>
+        <a id="manual1" mat-list-item href="#" target="_blank">{{ 'LANG.M_USER' | translate }}</a>
+      </button>
+      <button mat-menu-item>
+        <a id="manual2" mat-list-item href="assets/documents/ARICUE_Manual_Incidencias_v1.0.pdf"
+           target="_blank">{{ 'LANG.M_INC' | translate }}</a>
+      </button>
+    </mat-menu>
+  </mat-action-list>
+
+  <mat-action-list>
+    <mat-list-item [matMenuTriggerFor]="langMenu">{{ 'LANG.TITLE' | translate }}
+      <mat-icon class="icono-idioma">language</mat-icon>
+    </mat-list-item>
+    <mat-menu #langMenu="matMenu" xPosition="before">
+      <button mat-menu-item *ngFor="let lang of langs"
+              (click)="setLang(lang)">{{ 'LANG.'+(lang | uppercase) | translate }}</button>
+    </mat-menu>
+  </mat-action-list>
+  <!--<opa-user></opa-user>-->
+</mat-toolbar>
+
+<!-- Separador entre menú y contenido -->
+<div class="height-25em"></div>
+<mat-sidenav-container>
+  <!-- Menú vertical responsive -->
+  <mat-sidenav #sidenav fxShow="true" fxHide.gt-sm>
+    <div class="menu-vertical">
+      <mat-nav-list>
+        <a mat-list-item (click)="clearSessionStorage()" routerLink="/ayuda-publica" routerLinkActive="menu-activo"
+           [routerLinkActiveOptions]="{ exact: true }">{{ 'MENU.MANTENIMIENTO.AYUDA_PUBLICA' | translate }}</a>
+        <mat-action-list>
+          <mat-list-item [matMenuTriggerFor]="mantenimientoMenuVertical">
+            {{ 'MENU.MANTENIMIENTO.PRINCIPAL' | translate }}
+          </mat-list-item>
+          <mat-menu #mantenimientoMenuVertical="matMenu" xPosition="before">
+            <button mat-menu-item (click)="clearSessionStorage()"
+                    routerLink="/contactos">{{ 'MENU.MANTENIMIENTO.CONTACTOS' | translate }}</button>
+            <button mat-menu-item (click)="clearSessionStorage()"
+                    routerLink="/estados">{{ 'MENU.CONFIGURACION.ESTADO' | translate }}</button>
+            <button mat-menu-item (click)="clearSessionStorage()"
+                    routerLink="/centro-gestor">{{ 'MENU.MANTENIMIENTO.CENTRO_GESTOR' | translate }}</button>
+          </mat-menu>
+        </mat-action-list>
+
+        <mat-action-list>
+          <mat-list-item [matMenuTriggerFor]="manualMenuVertical">
+            {{ 'LANG.MANUAL' | translate }} <mat-icon class="icono-idioma">format_align_justify </mat-icon>
+          </mat-list-item>
+          <mat-menu #manualMenuVertical="matMenu" xPosition="before">
+            <button mat-menu-item>
+              <a mat-list-item href="#" target="_blank">{{ 'LANG.M_USER' | translate }}</a>
+            </button>
+          </mat-menu>
+        </mat-action-list>
+
+        <mat-action-list>
+          <mat-list-item [matMenuTriggerFor]="langMenuVertical">{{ 'LANG.TITLE' | translate }}
+            <mat-icon class="icono-idioma">language</mat-icon>
+          </mat-list-item>
+          <mat-menu #langMenuVertical="matMenu" xPosition="before">
+            <button mat-menu-item *ngFor="let lang of langs" (click)="setLang(lang)">
+              {{ 'LANG.'+(lang | uppercase) | translate}}</button>
+          </mat-menu>
+        </mat-action-list>
+        <div class="user-menu-movil">
+          <!--<opa-user></opa-user>-->
+        </div>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+  <div class="container-fluid">
+    <ng-content></ng-content>
+  </div>
+</mat-sidenav-container>
