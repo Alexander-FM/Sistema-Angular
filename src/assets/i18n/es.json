@@ -1,3 +1,21 @@
 {
-  "TITLE": "SISTEMA-VENTA"
+  "TITLE": "SISTEMA-VENTA",
+  "MENU": {
+    "MANTENIMIENTO": {
+      "PRINCIPAL": "Mantenimiento",
+      "AYUDA_PUBLICA": "Ayuda Pública",
+      "ESTADOS": "Estados",
+      "CONTACTOS": "Contactos",
+      "CENTRO_GESTOR": "Centro Gestor"
+    },
+    "AMBITO": "Conselleria de Hacienda y Modelo Económico"
+  },
+  "LANG": {
+    "TITLE": "Idioma",
+    "MANUAL": "Manual",
+    "M_USER": "Manual de usuario",
+    "M_INC": "Manual de incidencias",
+    "CA": "Valencià",
+    "ES": "Castellano"
+  }
 }

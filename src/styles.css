@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~primeicons/primeicons.css";
+@import "~primeng-lts/resources/themes/nova-light/theme.css";
+@import "~primeng-lts/resources/primeng.min.css";
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.margin-right-25em {
+  margin-right: .25em;
+}
+.height-25em {
+  height: .25em;
+}
+
+.width-1em {
+  width: 1em;
+}
+
+.width-0-5em {
+  width: 0.5em;
+}
+
+.height-25em {
+  height: .50em;
+}
+
+footer>mat-toolbar.mat-toolbar.mat-toolbar-single-row {
+  background: 0 0;
+  font-size: .9em;
+  font-weight: 400;
+  color: #c8102e;
+/*// position: fixed;*/
+  bottom: 0;
+}
+
+.mat-drawer-container {
+  background-color: white;
+}
+
+body .ui-widget {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 12px !important;
+  text-decoration: none;
+}

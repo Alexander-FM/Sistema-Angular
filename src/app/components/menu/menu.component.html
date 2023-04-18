@@ -7,13 +7,9 @@
       <img src="assets/images/logo.png" height="50">
     </a>
     <div class="linea-roja-separacion"></div>
-    <span>
-      <img src="assets/images/logo.png" height="40">
-    </span>
     <div class="width-0-5em"></div>
     <span fxShow="true" fxFlex class="two-lines">
-      Fondo Europeo de Desarrollo Regional - Una manera de hacer Europa<br />
-      Fons Europeu de Desenvolupament Regional - Una manera de fer Europa
+      Sistema de ventas - Una manera de hacer LATAM<br />
     </span>
     <div fxFlex class="header-app-nom" fxHide.lt-md>
       <a href="/"> {{ 'TITLE' | translate }}</a>
@@ -35,10 +31,6 @@
       <mat-menu #mantenimientoMenu="matMenu" xPosition="before">
         <button mat-menu-item (click)="clearSessionStorage()"
                 routerLink="/contactos">{{ 'MENU.MANTENIMIENTO.CONTACTOS' | translate }}</button>
-        <button mat-menu-item (click)="clearSessionStorage()"
-                routerLink="/estados">{{ 'MENU.MANTENIMIENTO.ESTADOS' | translate }}</button>
-        <button mat-menu-item (click)="clearSessionStorage()"
-                routerLink="/centro-gestor">{{ 'MENU.MANTENIMIENTO.CENTRO_GESTOR' | translate }}</button>
       </mat-menu>
     </mat-action-list>
 
