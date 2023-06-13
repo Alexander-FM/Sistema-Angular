@@ -19,7 +19,7 @@
 }
 
 .header-app-nom a {
-  margin-left: 50px;
+  margin-left: -70px;
   color: rgba(0, 0, 0, .87);
   text-decoration: none;
 }
@@ -77,7 +77,7 @@ a:hover {
 }
 
 .two-lines {
-  font-size: xx-small;
+  font-size: 15px;
   line-height: 1.6;
 }
 
