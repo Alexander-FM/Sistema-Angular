@@ -1,8 +1,5 @@
 <div class="container-header">
   <mat-toolbar class="header">
-    <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-    </button>
     <a href="https://www.gva.es/va/inicio/presentacion" target="_blank">
       <img src="assets/images/logo.png" height="50">
     </a>
@@ -12,101 +9,58 @@
       {{ 'MENU.AMBITO' | translate }}<br />
     </span>
     <div fxFlex class="header-app-nom">
-      <a href="/"> {{ 'TITLE' | translate }}</a>
+      <a class="color-rojo" href="/"> {{ 'TITLE' | translate }}</a>
     </div>
   </mat-toolbar>
 </div>
-<!-- Menú horizontal -->
-<mat-toolbar fxShow="true" fxHide.lt-md class="menu-horizontal container">
-  <mat-nav-list fxLayout="row">
-    <a mat-list-item (click)="clearSessionStorage()" routerLink="/ayuda-publica" routerLinkActive="menu-activo"
-       [routerLinkActiveOptions]="{ exact: true }">{{ 'MENU.MANTENIMIENTO.AYUDA_PUBLICA' | translate }}</a>
-    <mat-action-list>
-      <mat-list-item [matMenuTriggerFor]="mantenimientoMenu">
-        {{ 'MENU.MANTENIMIENTO.PRINCIPAL' | translate }}
-      </mat-list-item>
-      <mat-menu #mantenimientoMenu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="clearSessionStorage()"
-                routerLink="/contactos">{{ 'MENU.MANTENIMIENTO.CONTACTOS' | translate }}</button>
-      </mat-menu>
-    </mat-action-list>
-
-  </mat-nav-list>
-  <span flex class="width-inherit"></span>
-
-  <mat-action-list>
-    <mat-list-item [matMenuTriggerFor]="manualMenu">
-      {{ 'LANG.MANUAL' | translate }} <mat-icon class="icono-idioma">format_align_justify </mat-icon>
-    </mat-list-item>
-    <mat-menu #manualMenu="matMenu" xPosition="before">
-      <button mat-menu-item>
-        <a id="manual1" mat-list-item href="#" target="_blank">{{ 'LANG.M_USER' | translate }}</a>
-      </button>
-      <button mat-menu-item>
-        <a id="manual2" mat-list-item href="assets/documents/ARICUE_Manual_Incidencias_v1.0.pdf"
-           target="_blank">{{ 'LANG.M_INC' | translate }}</a>
-      </button>
-    </mat-menu>
-  </mat-action-list>
-
-  <mat-action-list>
-    <mat-list-item [matMenuTriggerFor]="langMenu">{{ 'LANG.TITLE' | translate }}
-      <mat-icon class="icono-idioma">language</mat-icon>
-    </mat-list-item>
-    <mat-menu #langMenu="matMenu" xPosition="before">
-      <button mat-menu-item *ngFor="let lang of langs"
-              (click)="setLang(lang)">{{ 'LANG.'+(lang | uppercase) | translate }}</button>
-    </mat-menu>
-  </mat-action-list>
-  <!--<opa-user></opa-user>-->
-</mat-toolbar>
-
-<!-- Separador entre menú y contenido -->
-<div class="height-25em"></div>
-<mat-sidenav-container>
-  <!-- Menú vertical responsive -->
-  <mat-sidenav #sidenav fxShow="true" fxHide.gt-sm>
-    <div class="menu-vertical">
-      <mat-nav-list>
-        <a mat-list-item (click)="clearSessionStorage()" routerLink="/ayuda-publica" routerLinkActive="menu-activo"
-           [routerLinkActiveOptions]="{ exact: true }">{{ 'MENU.MANTENIMIENTO.AYUDA_PUBLICA' | translate }}</a>
-        <mat-action-list>
-          <mat-list-item [matMenuTriggerFor]="mantenimientoMenuVertical">
-            {{ 'MENU.MANTENIMIENTO.PRINCIPAL' | translate }}
-          </mat-list-item>
-          <mat-menu #mantenimientoMenuVertical="matMenu" xPosition="before">
-            <button mat-menu-item (click)="clearSessionStorage()"
-                    routerLink="/contactos">{{ 'MENU.MANTENIMIENTO.CONTACTOS' | translate }}</button>
-          </mat-menu>
-        </mat-action-list>
-
-        <mat-action-list>
-          <mat-list-item [matMenuTriggerFor]="manualMenuVertical">
-            {{ 'LANG.MANUAL' | translate }} <mat-icon class="icono-idioma">format_align_justify </mat-icon>
-          </mat-list-item>
-          <mat-menu #manualMenuVertical="matMenu" xPosition="before">
-            <button mat-menu-item>
-              <a mat-list-item href="#" target="_blank">{{ 'LANG.M_USER' | translate }}</a>
-            </button>
-          </mat-menu>
-        </mat-action-list>
-
-        <mat-action-list>
-          <mat-list-item [matMenuTriggerFor]="langMenuVertical">{{ 'LANG.TITLE' | translate }}
-            <mat-icon class="icono-idioma">language</mat-icon>
-          </mat-list-item>
-          <mat-menu #langMenuVertical="matMenu" xPosition="before">
-            <button mat-menu-item *ngFor="let lang of langs" (click)="setLang(lang)">
-              {{ 'LANG.'+(lang | uppercase) | translate}}</button>
-          </mat-menu>
-        </mat-action-list>
-        <div class="user-menu-movil">
-          <!--<opa-user></opa-user>-->
-        </div>
-      </mat-nav-list>
-    </div>
-  </mat-sidenav>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <ng-content></ng-content>
+    <a class="navbar-brand" href="#">SISTVENT</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">{{ 'MENU.NAVBAR.INICIO' | translate }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ 'MENU.NAVBAR.CATEGORIA' | translate }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ 'MENU.NAVBAR.PRODUCTOS' | translate }}</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ 'MENU.MANTENIMIENTO.MANTENIMIENTO' | translate }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">{{ 'MENU.MANTENIMIENTO.MARCAS' | translate }}</a></li>
+            <li><a class="dropdown-item" href="#">{{ 'MENU.MANTENIMIENTO.VENTAS' | translate }}</a></li>
+            <li><a class="dropdown-item" href="#">{{ 'MENU.MANTENIMIENTO.REPORTES_VENTAS' | translate }}</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ 'MANUAL.TITLE' | translate }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_USER' | translate }}</a></li>
+            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_INC' | translate }}</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ 'LANG.TITLE' | translate }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">{{ 'LANG.ES' | translate }}</a></li>
+            <li><a class="dropdown-item" href="#">{{ 'LANG.EN' | translate }}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-</mat-sidenav-container>
+</nav>

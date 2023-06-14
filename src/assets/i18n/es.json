@@ -1,19 +1,27 @@
 {
   "TITLE": "Gestión Ventas",
   "MENU": {
+    "NAVBAR": {
+      "INICIO": "Inicio",
+      "CATEGORIA": "Categorías",
+      "PRODUCTOS": "Productos"
+    },
     "MANTENIMIENTO": {
-      "PRINCIPAL": "Mantenimiento",
-      "AYUDA_PUBLICA": "Ayuda Pública",
-      "CONTACTOS": "Contactos"
+      "MANTENIMIENTO": "Mantenimiento",
+      "MARCAS": "Marcas",
+      "VENTAS": "Ventas",
+      "REPORTES_VENTAS": "Reporte Ventas"
     },
     "AMBITO": "Modelo de un sistema de ventas"
   },
   "LANG": {
     "TITLE": "Idioma",
-    "MANUAL": "Manual",
-    "M_USER": "Manual de usuario",
-    "M_INC": "Manual de incidencias",
     "EN": "Inglés",
     "ES": "Castellano"
+  },
+  "MANUAL": {
+    "TITLE": "Manual",
+    "M_USER": "Manual de usuario",
+    "M_INC": "Manual de incidencias"
   }
 }

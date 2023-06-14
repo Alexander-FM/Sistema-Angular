@@ -1,87 +1,11 @@
-.menu-horizontal {
-  display: flex;
-  flex-direction: row;
-  border-bottom: 1px solid #c8102e;
-  height: 35px;
-}
-
-.mat-list-base {
-  padding-top: 0px;
-}
-
-.mat-list-base .mat-list-item {
-  font-size: 14px;
-  color: #c8102e;
-}
-
-.header {
-  /*height: 100px;*/
-  background: #fff;
-}
-
-.header-app-nom a {
-  margin-left: -70px;
-  color: rgba(0, 0, 0, .87);
-  text-decoration: none;
-}
-
-.mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
-  height: 35px;
-}
-
-.icono-idioma {
-  margin-left: 10px;
-}
-
-.user-menu-movil {
-  margin-left: 16px !important;
-}
-
-.menu-vertical {
-  border-bottom: 1px solid #c8102e;
-}
-
-a:hover {
-  color: #c8102e !important;
-}
-
-.ambito-header {
-  font-size: 15px;
-  margin-right: 30px;
-  text-align: right;
-}
-
-.menu-activo {
-  background: rgba(0, 0, 0, .04);
-}
-
 .container-header {
   border-bottom: 1px solid #c8102e;
 }
-
-@media ( min-width : 960px) {
-  .container {
-  /* padding-right: 100px;
-  // padding-left: 100px;*/
-    background: #fff;
-  }
-  .container-header {
-    padding-right: 10px;
-    padding-left: 10px;
-    background: #fff;
-    border-bottom: 1px solid #c8102e;
-  }
+.header-app-nom a {
+  margin-left: -70px;
+  color: #c70f2d;
+  text-decoration: none;
 }
-
-.two-lines {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.width-inherit {
-  width: inherit;
-}
-
 .linea-roja-separacion {
   border-left: 2px solid;
   width: 2px;
@@ -90,24 +14,15 @@ a:hover {
   float:left;
   margin: 0.3em
 }
-
-.mat-list-base .mat-list-item {
-/*// font-size: 14px;
-// color: #c8102e;*/
-  text-decoration:none;
+@media ( min-width : 960px) {
+  .container-header {
+    padding-right: 10px;
+    padding-left: 10px;
+    background: #fff;
+    border-bottom: 1px solid #c8102e;
+  }
+}
+.dropdown-container {
+  overflow-x: hidden;
 }
 
-a, a:focus, a:active, a:visited {
-  text-decoration: none;
-  color: inherit;
-}
-
-a#manual1:hover {
-  text-decoration: none !important;
-  color: inherit !important;
-}
-
-a#manual2:hover {
-  text-decoration: none !important;
-  color: inherit !important;
-}
