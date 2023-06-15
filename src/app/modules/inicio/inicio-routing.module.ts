@@ -4,6 +4,7 @@ import { InicioMainComponent } from './inicio-main/inicio-main.component';
 
 const routes: Routes = [
   { path: '', component: InicioMainComponent }
+
 ];
 
 @NgModule({
