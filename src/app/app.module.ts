@@ -17,7 +17,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatButtonModule,
     FlexLayoutModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
   ],

@@ -2,10 +2,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
 const routes: Routes = [
-  /*{
+  {
     path: 'inicio',
     loadChildren: './modules/inicio/inicio.module#InicioModule',
-  },*/
+  },
+  {
+    path: 'categorias',
+    loadChildren: './modules/categorias/categorias.module#CategoriasModule',
+  },
   {
     path: '', redirectTo: 'inicio', pathMatch: 'full'
   },

@@ -22,10 +22,14 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">{{ 'MENU.NAVBAR.INICIO' | translate }}</a>
+          <a class="nav-link" routerLink="/inicio" routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">
+            {{ 'MENU.NAVBAR.INICIO' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">{{ 'MENU.NAVBAR.CATEGORIA' | translate }}</a>
+          <a class="nav-link" routerLink="/categorias" routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">
+            {{ 'MENU.NAVBAR.CATEGORIA' | translate }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">{{ 'MENU.NAVBAR.PRODUCTOS' | translate }}</a>
