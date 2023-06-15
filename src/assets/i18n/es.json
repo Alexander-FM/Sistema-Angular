@@ -23,5 +23,23 @@
     "TITLE": "Manual",
     "M_USER": "Manual de usuario",
     "M_INC": "Manual de incidencias"
+  },
+  "COMUN": {
+    "ACCION": {
+      "NUEVO": "Nuevo"
+    },
+    "TABLA": {
+      "MOSTRANDO": "Mostrando"
+    },
+    "PANEL": {
+      "FILTROS": "Filtros"
+    }
+  },
+  "CATEGORIAS": {
+    "TITULO": "Categorías",
+    "FILTROS": {
+      "NOMBRE_CATEGORIA": "Categoria",
+      "VER_INACTIVOS": "Ver Inactivos"
+    }
   }
 }

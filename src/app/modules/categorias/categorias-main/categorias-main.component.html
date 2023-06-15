@@ -1,3 +1,26 @@
-<p>
-  categorias-main works!
-</p>
+<div class="panel-container">
+  <h4>{{ 'CATEGORIAS.TITULO' | translate }}</h4>
+  <p-panel>
+    <p-header>
+      <div>
+        <span class="ui-panel-title">{{ 'COMUN.PANEL.FILTROS' | translate }}</span>
+      </div>
+    </p-header>
+    <div class="height-25em"></div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-4">
+    <span class="ui-float-label">
+      <input [(ngModel)]="filtro.nombreCategoria" id="textoFiltro" type="text" size="30" pInputText>
+        <label for="textoFiltro">{{ 'CATEGORIAS.FILTROS.NOMBRE_CATEGORIA' | translate }}</label>
+    </span>
+      </div>
+      <div class="ui-g-12 ui-md-2">
+      <span style="margin-top: 4px;" class="ui-float-label">
+        <p-checkbox name="verInactivos" [binary]="true"
+                    [(ngModel)]="filtro.verInactivos" label="{{ 'CATEGORIAS.FILTROS.VER_INACTIVOS' | translate }}">
+        </p-checkbox>
+      </span>
+      </div>
+    </div>
+  </p-panel>
+</div>
