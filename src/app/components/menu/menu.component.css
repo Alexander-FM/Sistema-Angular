@@ -25,4 +25,13 @@
 .dropdown-container {
   overflow-x: hidden;
 }
+.icono-container {
+  display: flex;
+  align-items: center;
+  margin-left: 10px; /* Ajusta el espaciado según tus necesidades */
+}
+
+.icono-personalizado {
+  margin-left: 5px; /* Ajusta el espaciado entre el icono y el texto según tus necesidades */
+}
 

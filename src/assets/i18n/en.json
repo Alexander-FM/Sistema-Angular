@@ -1,19 +1,27 @@
 {
   "TITLE": "Sales Management",
   "MENU": {
-    "MANTENIMIENTO": {
-      "PRINCIPAL": "Maintenance",
-      "AYUDA_PUBLICA": "Public Aid",
-      "CONTACTOS": "Contacts"
+    "NAVBAR": {
+      "INICIO": "Start",
+      "CATEGORIA": "Categories",
+      "PRODUCTOS": "Products"
     },
-    "AMBITO": "Model of a sales system"
+    "MANTENIMIENTO": {
+      "MANTENIMIENTO": "Maintenance",
+      "MARCAS": "Brands",
+      "VENTAS": "Sales",
+      "REPORTES_VENTAS": "Sales Report"
+    },
+    "AMBITO": "Sales system model"
   },
   "LANG": {
     "TITLE": "Language",
-    "MANUAL": "Manual",
+    "EN": "English",
+    "ES": "Spanish"
+  },
+  "MANUAL": {
+    "TITLE": "Manual",
     "M_USER": "User manual",
-    "M_INC": "Incident manual",
-    "EN": "Inglés",
-    "ES": "Castellano"
+    "M_INC": "Manual of incidents"
   }
 }

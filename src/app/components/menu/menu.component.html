@@ -45,19 +45,26 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{ 'MANUAL.TITLE' | translate }}
+            <i class="bi bi-file-earmark-pdf"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_USER' | translate }}</a></li>
-            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_INC' | translate }}</a></li>
+            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_USER' | translate }}<img src="assets/images/pdf.png" alt="Manual PDF" class="icono-personalizado"></a></li>
+            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_INC' | translate }}<img src="assets/images/pdf.png" alt="Manual PDF" class="icono-personalizado"></a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{ 'LANG.TITLE' | translate }}
-          </a>
+            <i class="bi bi-translate"></i></a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">{{ 'LANG.ES' | translate }}</a></li>
-            <li><a class="dropdown-item" href="#">{{ 'LANG.EN' | translate }}</a></li>
+            <li><a class="dropdown-item" *ngFor="let lang of langs" (click)="setLang(lang)">
+              {{ 'LANG.'+(lang | uppercase) | translate }}
+              <ng-container *ngIf="lang === 'es'" class="icono-container">
+                <img src="assets/images/spain.png" alt="Icono ES" class="icono-personalizado">
+              </ng-container>
+              <ng-container *ngIf="lang === 'en'" class="icono-container">
+                <img src="assets/images/united-states.png" alt="Icono EN" class="icono-personalizado">
+              </ng-container></a></li>
           </ul>
         </li>
       </ul>
