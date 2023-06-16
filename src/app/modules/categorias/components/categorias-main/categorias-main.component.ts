@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoriaFilter} from '../models/categoria-filter';
+import {CategoriaFilter} from '../../models/categoria-filter';
 import {TranslateService} from '@ngx-translate/core';
-import {AbstractComponent} from '../../../components/shared/abstract.component';
+import {AbstractComponent} from '../../../../components/shared/abstract.component';
 
 @Component({
   selector: 'app-categorias-main',
