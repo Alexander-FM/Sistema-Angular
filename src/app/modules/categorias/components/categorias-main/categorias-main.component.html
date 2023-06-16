@@ -10,7 +10,7 @@
     <div class="ui-g ui-fluid">
       <div class="ui-g-12 ui-md-4">
     <span class="ui-float-label">
-      <input [(ngModel)]="filtro.nombreCategoria" id="textoFiltro" type="text" size="30" pInputText>
+      <input [(ngModel)]="filtro.nombre" id="textoFiltro" type="text" size="30" pInputText>
         <label for="textoFiltro">{{ 'CATEGORIAS.FILTROS.NOMBRE_CATEGORIA' | translate }}</label>
     </span>
       </div>
@@ -23,4 +23,36 @@
       </div>
     </div>
   </p-panel>
+
+  <!-- BOTONERA DE ACCIONES -->
+  <p-toolbar>
+    <div fxLayout="row" fxLayoutGap="5px" fxFlex>
+      <p-button label="{{ 'COMUN.ACCION.NUEVO' | translate }}"
+        (onClick)="nuevoRegistro()" styleClass="ui-button-info">
+      </p-button>
+      <p-button label="{{ 'COMUN.ACCION.EDITAR' | translate }}"
+                (onClick)="editarRegistro()" [disabled]="!(registroSeleccionado && registroSeleccionado.vigencia === 'SI')"
+                styleClass="ui-button-info"></p-button>
+      <p-button label="{{ 'COMUN.ACCION.VER' | translate }}" (onClick)="verRegistro()" [disabled]="!registroSeleccionado"
+                styleClass="ui-button-info"></p-button>
+      <p-button label="{{ 'COMUN.ACCION.ACTIVAR' | translate }}"
+                (onClick)="confirmarActivarRegistro()"
+                [disabled]="!(registroSeleccionado && registroSeleccionado.vigencia === 'NO')" styleClass="ui-button-info">
+      </p-button>
+      <p-button label="{{ 'COMUN.ACCION.DESACTIVAR' | translate }}"
+                (onClick)="confirmarDesactivarRegistro()"
+                [disabled]="!(registroSeleccionado && registroSeleccionado.vigencia === 'SI')" styleClass="ui-button-info">
+      </p-button>
+      <p-button label="{{ 'COMUN.ACCION.ELIMINAR' | translate }}"
+                (onClick)="confirmarEliminarRegistro()" [disabled]="!registroSeleccionado" styleClass="ui-button-info"></p-button>
+    </div>
+
+    <div style="text-align: right;" fxLayoutGap="5px">
+      <p-button label="{{ 'COMUN.ACCION.BUSCAR' | translate }}" (onClick)="filtrar()" styleClass="ui-button-info"
+                icon="pi pi-search">
+      </p-button>
+      <p-button label="{{ 'COMUN.ACCION.LIMPIAR' | translate }}" (onClick)="resetFiltros()" styleClass="ui-button-info">
+      </p-button>
+    </div>
+  </p-toolbar>
 </div>
