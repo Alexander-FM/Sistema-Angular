@@ -47,6 +47,10 @@
     "FILTROS": {
       "NOMBRE_CATEGORIA": "Categoria",
       "VER_INACTIVOS": "Ver Inactivos"
+    },
+    "TABLA": {
+      "CATEGORIA": "Categoría",
+      "VIGENCIA": "Vigencia"
     }
   }
 }
