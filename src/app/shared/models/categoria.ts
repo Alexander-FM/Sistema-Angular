@@ -3,7 +3,7 @@ import {Util} from '../../../shared/utils/utils';
 export interface Categoria {
   id?: number;
   nombre: string;
-  vigencia: string;
+  vigencia: boolean;
   // tslint:disable-next-line:no-misused-new
   new(parameters?: any): Categoria;
 }

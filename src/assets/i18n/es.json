@@ -36,10 +36,16 @@
       "LIMPIAR": "Limpiar"
     },
     "TABLA": {
-      "MOSTRANDO": "Mostrando"
+      "MOSTRANDO": "Mostrando",
+      "COLUMNAS_SELECCIONADAS": "Columnas seleccionadas",
+      "SELECCIONAR": "Seleccionar columnas"
     },
     "PANEL": {
       "FILTROS": "Filtros"
+    },
+    "ESTADO": {
+      "ACTIVA": "Activa",
+      "INACTIVA": "Inactive"
     }
   },
   "CATEGORIAS": {
@@ -50,7 +56,8 @@
     },
     "TABLA": {
       "CATEGORIA": "Categoría",
-      "VIGENCIA": "Vigencia"
+      "VIGENCIA": "Vigencia",
+      "NO_ELEMENTOS": "No hay categorías"
     }
   }
 }
