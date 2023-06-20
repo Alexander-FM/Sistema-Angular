@@ -13,7 +13,7 @@ export class CategoriasTableComponent {
 
   @Input() page: Page<any>;
   @Input() isLoading: boolean;
-  rows = 5;
+  rows = 10;
   @Input() colsCategorias: any[];
   @Input() selectedColumnsCategoria: any[];
   // tslint:disable-next-line:no-output-on-prefix

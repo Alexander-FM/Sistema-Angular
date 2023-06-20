@@ -58,6 +58,17 @@
       "CATEGORIA": "Categoría",
       "VIGENCIA": "Vigencia",
       "NO_ELEMENTOS": "No hay categorías"
+    },
+    "DETAIL": {
+      "TITULO_CREATE": "Registrar Categoría",
+      "TITULO_UPDATE": "Actualizar Categoría",
+      "NOMBRE_CATEGORIA": "Categoria",
+      "VIGENCIA_CATEGORIA": "Activo / Inactivo",
+      "CREAR_CATEGORIA": "Guardar",
+      "EDITAR_CATEGORIA": "Guardar",
+      "CANCELAR_CATEGORIA": "Cancelar",
+      "ELIMINAR_CATEGORIA": "Eliminar Categoría",
+      "ALERTA_ELIMINAR": "¿Está seguro de eliminar la categoría?"
     }
   }
 }

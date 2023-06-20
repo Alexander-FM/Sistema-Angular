@@ -9,6 +9,8 @@ import {CategoriaService} from '../../services/categoria.service';
 import {Pageable} from '../../../../shared/models/pageable';
 import {takeUntil} from 'rxjs/operators';
 import {GenericResponse} from '../../../../shared/models/generic-response';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ConfirmationService} from 'primeng-lts/api';
 
 @Component({
   selector: 'app-categorias-main',
@@ -24,10 +26,24 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   filtro: CategoriaFilter;
   selectedColumnsCategoria: any[];
   colsCategorias: any[];
+  displayNuevo = false;
+  displayMsj = false;
+  estadoModal: string;
+  textoTituloNuevoEditar: string;
+  textoBotonNuevoEditar: string;
+  view = false;
+  nuevaCategoriaForm: FormGroup = this.fb.group({
+    id: ['', ''],
+    nombre: ['', Validators.required],
+    vigencia: ['', '']
+  });
+  registroCategoria: Categoria;
 
   constructor(
     protected translateService: TranslateService,
-    protected categoriaService: CategoriaService
+    protected categoriaService: CategoriaService,
+    protected fb: FormBuilder,
+    protected confirmationService: ConfirmationService
   ) {
     super(translateService);
   }
@@ -79,21 +95,62 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     });
   }
 
-  private getActivaInactiva(opcionSN: boolean): string {
-    if (opcionSN === true) {
-      return this.translateService.instant('COMUN.ESTADO.ACTIVA');
-    }
-    if (opcionSN === false) {
-      return this.translateService.instant('COMUN.ESTADO.INACTIVA');
+  cambioTextoModal(tipo: string) {
+    this.estadoModal = tipo;
+    if (tipo === 'N') {
+      this.textoTituloNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.TITULO_CREATE');
+      this.textoBotonNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.CREAR_CATEGORIA');
+    } else {
+      this.textoTituloNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.TITULO_UPDATE');
+      this.textoBotonNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.EDITAR_CATEGORIA');
     }
   }
 
   nuevoRegistro() {
-
+    this.displayNuevo = true;
+    this.cambioTextoModal('N');
+    this.nuevaCategoriaForm.reset();
   }
 
   editarRegistro() {
+    this.displayNuevo = true;
+    this.cambioTextoModal('E');
+    this.categoriaService.getCategoriaById(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
+      .subscribe((categoria: Categoria) => {
+        this.registroCategoria = categoria;
+        this.gestionarDtoToReactiveForm();
+      });
+  }
 
+  private gestionarDtoToReactiveForm() {
+    this.nuevaCategoriaForm.patchValue(this.registroCategoria);
+  }
+
+  private gestionarReactiveFormToDto() {
+    this.registroCategoria = new Categoria(this.nuevaCategoriaForm.value);
+  }
+
+  createUpdateRegistro() {
+    this.gestionarReactiveFormToDto();
+    this.displayNuevo = false;
+    if (this.estadoModal === 'N') {
+      this.categoriaService.create(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
+        this.registroCategoria.id = e;
+        this.actualizarRegistrosTabla();
+        this.registroCategoria = new Categoria();
+      });
+    } else {
+      this.categoriaService.update(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
+        this.registroCategoria.id = e;
+        this.actualizarRegistrosTabla();
+        this.registroCategoria = new Categoria();
+      });
+    }
+  }
+
+  actualizarRegistrosTabla() {
+    this.categoriasTable.table.clearState();
+    this.categoriasTable.table.reset();
   }
 
   confirmarActivarRegistro() {
@@ -105,7 +162,19 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   }
 
   confirmarEliminarRegistro() {
-
+    this.confirmationService.confirm({
+      message: this.translateService.instant('CATEGORIAS.DETAIL.ALERTA_ELIMINAR'),
+      header: this.translateService.instant('CATEGORIAS.DETAIL.ELIMINAR_CATEGORIA'),
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.categoriaService.delete(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
+          .subscribe(() => {
+            this.categoriasTable.table.reset();
+            this.registroSeleccionado = null;
+          });
+      },
+      reject: () => { }
+    });
   }
 
   verRegistro() {
@@ -117,6 +186,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   }
 
   resetFiltros() {
-
+    this.filtro = new CategoriaFilter();
+    this.actualizarRegistrosTabla();
   }
 }

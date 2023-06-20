@@ -34,5 +34,24 @@ export class CategoriaService extends AbstractService {
       .pipe(map((response: Page<Categoria>) => this.gestionarPage<Categoria>(response, Categoria)));
   }
 
+  getCategoriaById(id: number): Observable<Categoria> {
+    return this.http.get(`${this.endpoint}/getById/${id}`).pipe(
+      map(response => new Categoria(response))
+    );
+  }
+
+  create(categoria: Categoria): Observable<any> {
+    categoria = categoria.convertCategoria() as unknown as Categoria;
+    return this.http.post(this.endpoint, categoria);
+  }
+
+  update(categoria: Categoria): Observable<any> {
+    categoria = categoria.convertCategoria() as unknown as Categoria;
+    return this.http.put(`${this.endpoint}/${categoria.id}`, categoria);
+  }
+
+  delete(categoriaId: number): Observable<any> {
+    return this.http.delete(`${this.endpoint}/deleteCategoria/${categoriaId}`);
+  }
 
 }
