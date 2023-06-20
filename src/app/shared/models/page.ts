@@ -8,3 +8,4 @@ export declare class Page<T> {
   totalElements: number;
   content: T[];
 }
+

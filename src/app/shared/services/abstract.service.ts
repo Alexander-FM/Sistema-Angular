@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Page} from 'src/app/shared/models/page';
+import {GenericResponse} from '../models/generic-response';
 
 /**
  * Servicio abstracto con métodos globalmente utilizados por otros servicios.
@@ -38,4 +39,13 @@ export abstract class AbstractService {
 
     return page;
   }
+
+  protected gestionarPage2<T>(response: GenericResponse<T>, constructor: { new(parameters?: any): T; }): GenericResponse<T> {
+    if (response && response.body) {
+      response.body.content = this.gestionarArray(response.body.content, constructor);
+    }
+    return response;
+  }
+
+
 }

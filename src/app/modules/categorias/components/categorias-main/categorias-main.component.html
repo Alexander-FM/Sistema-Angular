@@ -31,19 +31,19 @@
                 label="{{ 'COMUN.ACCION.NUEVO' | translate }}" styleClass="ui-button-info">
       </p-button>
       <p-button (onClick)="editarRegistro()"
-                [disabled]="!(registroSeleccionado && registroSeleccionado.vigencia === 'SI')"
+                [disabled]="!(registroSeleccionado && registroSeleccionado.vigenciaString === 'Activo')"
                 label="{{ 'COMUN.ACCION.EDITAR' | translate }}"
                 styleClass="ui-button-info"></p-button>
       <p-button (onClick)="verRegistro()" [disabled]="!registroSeleccionado"
                 label="{{ 'COMUN.ACCION.VER' | translate }}"
                 styleClass="ui-button-info"></p-button>
       <p-button (onClick)="confirmarActivarRegistro()"
-                [disabled]="!(registroSeleccionado && registroSeleccionado.vigencia === 'NO')"
+                [disabled]="!(registroSeleccionado && registroSeleccionado.vigenciaString === 'Inactivo')"
                 label="{{ 'COMUN.ACCION.ACTIVAR' | translate }}"
                 styleClass="ui-button-info">
       </p-button>
       <p-button (onClick)="confirmarDesactivarRegistro()"
-                [disabled]="!(registroSeleccionado && registroSeleccionado.vigencia === 'SI')"
+                [disabled]="!(registroSeleccionado && registroSeleccionado.vigenciaString === 'Activo')"
                 label="{{ 'COMUN.ACCION.DESACTIVAR' | translate }}"
                 styleClass="ui-button-info">
       </p-button>
@@ -60,7 +60,7 @@
       </p-button>
     </div>
   </p-toolbar>
-  <app-categorias-table #categoriasTableComponent (onColumnSelect)="columnaSeleccionada($event)" (onLazyLoad)="cargarRegistrosTabla($event)"
+  <app-categorias-table #categoriasTable (onColumnSelect)="columnaSeleccionada($event)" (onLazyLoad)="cargarRegistrosTabla($event)"
                         (onRowSelect)="seleccionarRegistro($event)"
                         [colsCategorias]="colsCategorias"
                         [isLoading]="isLoading"

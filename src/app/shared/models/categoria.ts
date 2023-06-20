@@ -3,7 +3,7 @@ import {Util} from '../../../shared/utils/utils';
 export interface Categoria {
   id?: number;
   nombre: string;
-  vigencia: boolean;
+  vigenciaString: string;
   // tslint:disable-next-line:no-misused-new
   new(parameters?: any): Categoria;
 }
@@ -16,7 +16,7 @@ export class Categoria {
     return {
       id: this.id ? this.id : null,
       nombre: this.nombre ? this.nombre : null,
-      vigencia: this.vigencia ? this.vigencia : null
+      vigenciaString: this.vigenciaString ? this.vigenciaString : null
     };
   }
 }

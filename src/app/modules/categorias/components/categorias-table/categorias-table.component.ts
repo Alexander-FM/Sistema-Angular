@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Page} from '../../../../shared/models/page';
 import {Pageable} from '../../../../shared/models/pageable';
 import {Table} from 'primeng-lts/table';
@@ -71,7 +71,7 @@ export class CategoriasTableComponent {
     switch (col.field) {
       case 'nombre':
         return '150px';
-      case 'vigencia':
+      case 'vigenciaString':
         return '80px';
     }
   }

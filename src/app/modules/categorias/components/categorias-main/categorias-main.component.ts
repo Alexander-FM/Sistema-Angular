@@ -8,6 +8,7 @@ import {Page} from '../../../../shared/models/page';
 import {CategoriaService} from '../../services/categoria.service';
 import {Pageable} from '../../../../shared/models/pageable';
 import {takeUntil} from 'rxjs/operators';
+import {GenericResponse} from '../../../../shared/models/generic-response';
 
 @Component({
   selector: 'app-categorias-main',
@@ -16,7 +17,7 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class CategoriasMainComponent extends AbstractComponent implements OnInit {
 
-  @ViewChild('categoriasTableComponent') categoriasTableComponent: CategoriasTableComponent;
+  @ViewChild('categoriasTable') categoriasTable: CategoriasTableComponent;
   page: Page<Categoria> = {} as Page<Categoria>;
   registroSeleccionado: Categoria;
   isLoading = true;
@@ -42,11 +43,23 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
 
   cargarColumnasCategoria() {
     this.selectedColumnsCategoria = this.categoriaService.cargarColumnasCategoria();
+    const existeListaAyudaPublica = localStorage.getItem('LISTA_CATEGORIAS');
+    if (existeListaAyudaPublica) {
+      const data = JSON.parse(localStorage.getItem('LISTA_CATEGORIAS'));
+      if (data) {
+        this.colsCategorias = data;
+      } else {
+        this.colsCategorias = this.categoriaService.cargarColumnasCategoria();
+      }
+    } else {
+      this.colsCategorias = this.categoriaService.cargarColumnasCategoria();
+    }
   }
 
   seleccionarRegistro(categoria: Categoria) {
     this.registroSeleccionado = categoria;
   }
+
   columnaSeleccionada(columns: any) {
     this.colsCategorias = this.categoriaService.cargarColumnasCategoria();
     this.colsCategorias = [];
@@ -56,16 +69,12 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     }
     localStorage.setItem('LISTA_CATEGORIAS', JSON.stringify(this.colsCategorias));
   }
+
   cargarRegistrosTabla(pageable?: Pageable) {
     this.isLoading = true;
     this.categoriaService.filtrar(pageable, this.filtro)
-      .pipe(takeUntil(this.destroy$)).subscribe((ayudaPublica: Page<Categoria>) => {
-      this.page = ayudaPublica;
-      // tslint:disable-next-line:no-shadowed-variable
-      /*this.page.content.forEach(Categoria => {
-        Categoria.vigencia = Boolean(this.getActivaInactiva(Categoria.vigencia));
-
-      });*/
+      .pipe(takeUntil(this.destroy$)).subscribe((categoria: Page<Categoria>) => {
+      this.page = categoria;
       this.isLoading = false;
     });
   }
@@ -79,7 +88,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     }
   }
 
-    nuevoRegistro() {
+  nuevoRegistro() {
 
   }
 
@@ -104,7 +113,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   }
 
   filtrar() {
-
+    this.categoriasTable.onLazyLoad.emit(this.categoriasTable.pageable);
   }
 
   resetFiltros() {

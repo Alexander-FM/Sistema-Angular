@@ -10,6 +10,7 @@ import {Categoria} from '../../../shared/models/categoria';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
 import {AppConstants} from '../../../../shared/utils/app.constants';
+import {GenericResponse} from '../../../shared/models/generic-response';
 @Injectable()
 export class CategoriaService extends AbstractService {
   private endpoint: string = environment.apiUrl + AppConstants.CATEGORIA_MAIN;
@@ -22,7 +23,7 @@ export class CategoriaService extends AbstractService {
     let res: any[];
     res = [
       {id: 'nombre', field: 'nombre', header: this.translateService.instant('CATEGORIAS.TABLA.CATEGORIA')},
-      {id: 'vigencia', field: 'vigencia', header: this.translateService.instant('CATEGORIAS.TABLA.VIGENCIA')}
+      {id: 'vigenciaString', field: 'vigenciaString', header: this.translateService.instant('CATEGORIAS.TABLA.VIGENCIA')}
     ];
     return res;
   }
@@ -32,4 +33,6 @@ export class CategoriaService extends AbstractService {
     return this.http.postPaginated<Categoria, CategoriaFilter>(this.endpoint + '/filtrar', page, filtroCategoria)
       .pipe(map((response: Page<Categoria>) => this.gestionarPage<Categoria>(response, Categoria)));
   }
+
+
 }
