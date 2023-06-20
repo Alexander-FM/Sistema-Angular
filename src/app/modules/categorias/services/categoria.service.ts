@@ -54,4 +54,12 @@ export class CategoriaService extends AbstractService {
     return this.http.delete(`${this.endpoint}/deleteCategoria/${categoriaId}`);
   }
 
+  activar(categoriaId: number): Observable<any> {
+    return this.http.get(`${this.endpoint}/activar/${categoriaId}`);
+  }
+
+  desactivar(categoriaId: number): Observable<any> {
+    return this.http.get(`${this.endpoint}/desactivar/${categoriaId}`);
+  }
+
 }

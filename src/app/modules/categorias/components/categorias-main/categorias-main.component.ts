@@ -166,11 +166,35 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   }
 
   confirmarActivarRegistro() {
-
+    this.confirmationService.confirm({
+      message: this.translateService.instant('CATEGORIAS.DETAIL.ALERTA_ACTIVAR'),
+      header: this.translateService.instant('CATEGORIAS.DETAIL.ACTIVAR_CATEGORIA'),
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.categoriaService.activar(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
+          .subscribe(() => {
+            this.categoriasTable.table.reset();
+            this.registroSeleccionado = null;
+          });
+      },
+      reject: () => { }
+    });
   }
 
   confirmarDesactivarRegistro() {
-
+    this.confirmationService.confirm({
+      message: this.translateService.instant('CATEGORIAS.DETAIL.DESACTIVAR_CATEGORIA'),
+      header: this.translateService.instant('CATEGORIAS.DETAIL.ALERTA_DESACTIVAR'),
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.categoriaService.desactivar(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
+          .subscribe(() => {
+            this.categoriasTable.table.reset();
+            this.registroSeleccionado = null;
+          });
+      },
+      reject: () => { }
+    });
   }
 
   confirmarEliminarRegistro() {

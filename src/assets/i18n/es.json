@@ -71,7 +71,11 @@
       "EDITAR_CATEGORIA": "Guardar",
       "CANCELAR_CATEGORIA": "Cancelar",
       "ELIMINAR_CATEGORIA": "Eliminar Categoría",
-      "ALERTA_ELIMINAR": "¿Está seguro de eliminar la categoría?"
+      "ALERTA_ELIMINAR": "¿Está seguro de eliminar la categoría?",
+      "ACTIVAR_CATEGORIA": "Activar Categoría",
+      "ALERTA_ACTIVAR": "¿Está seguro de activar la categoría?",
+      "DESACTIVAR_CATEGORIA": "Desactivar Categoría",
+      "ALERTA_DESACTIVAR": "¿Está seguro de desactivar la categoría?"
     }
   }
 }

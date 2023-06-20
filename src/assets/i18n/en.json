@@ -71,7 +71,11 @@
       "EDITAR_CATEGORIA": "Save",
       "CANCELAR_CATEGORIA": "Cancel",
       "ELIMINAR_CATEGORIA": "Delete Category",
-      "ALERTA_ELIMINAR": "Are you sure to delete the category?"
+      "ALERTA_ELIMINAR": "Are you sure to delete the category?",
+      "ACTIVAR_CATEGORIA": "Activate Category",
+      "ALERTA_ACTIVAR": "Are you sure to activate the category?",
+      "DESACTIVAR_CATEGORIA": "Deactivate Category",
+      "ALERTA_DESACTIVAR": "Are you sure to deactivate the category?"
     }
   }
 }
