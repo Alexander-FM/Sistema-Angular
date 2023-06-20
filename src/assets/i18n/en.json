@@ -33,7 +33,9 @@
       "DESACTIVAR": "Disable",
       "ELIMINAR": "Delete",
       "BUSCAR": "Search",
-      "LIMPIAR": "Clean"
+      "LIMPIAR": "Clean",
+      "SI": "Yes",
+      "NO": "Not"
     },
     "TABLA": {
       "MOSTRANDO": "Showing",
@@ -58,6 +60,18 @@
       "CATEGORIA": "Category",
       "VIGENCIA": "Validity",
       "NO_ELEMENTOS": "No categories"
+    },
+    "DETAIL": {
+      "TITULO_CREATE": "Register Category",
+      "TITULO_UPDATE": "Update Category",
+      "TITULO_VER": "See Categoría",
+      "NOMBRE_CATEGORIA": "Category",
+      "VIGENCIA_CATEGORIA": "Active / Inactive",
+      "CREAR_CATEGORIA": "Save",
+      "EDITAR_CATEGORIA": "Save",
+      "CANCELAR_CATEGORIA": "Cancel",
+      "ELIMINAR_CATEGORIA": "Delete Category",
+      "ALERTA_ELIMINAR": "Are you sure to delete the category?"
     }
   }
 }

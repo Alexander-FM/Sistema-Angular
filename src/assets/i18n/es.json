@@ -33,7 +33,9 @@
       "DESACTIVAR": "Desactivar",
       "ELIMINAR": "Eliminar",
       "BUSCAR": "Buscar",
-      "LIMPIAR": "Limpiar"
+      "LIMPIAR": "Limpiar",
+      "SI": "Sí",
+      "NO": "No"
     },
     "TABLA": {
       "MOSTRANDO": "Mostrando",
@@ -62,6 +64,7 @@
     "DETAIL": {
       "TITULO_CREATE": "Registrar Categoría",
       "TITULO_UPDATE": "Actualizar Categoría",
+      "TITULO_VER": "Ver Categoría",
       "NOMBRE_CATEGORIA": "Categoria",
       "VIGENCIA_CATEGORIA": "Activo / Inactivo",
       "CREAR_CATEGORIA": "Guardar",

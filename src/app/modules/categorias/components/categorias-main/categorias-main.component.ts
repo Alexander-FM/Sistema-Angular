@@ -27,7 +27,6 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   selectedColumnsCategoria: any[];
   colsCategorias: any[];
   displayNuevo = false;
-  displayMsj = false;
   estadoModal: string;
   textoTituloNuevoEditar: string;
   textoBotonNuevoEditar: string;
@@ -100,9 +99,11 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     if (tipo === 'N') {
       this.textoTituloNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.TITULO_CREATE');
       this.textoBotonNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.CREAR_CATEGORIA');
-    } else {
+    } else if (tipo === 'E') {
       this.textoTituloNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.TITULO_UPDATE');
       this.textoBotonNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.EDITAR_CATEGORIA');
+    } else {
+      this.textoTituloNuevoEditar = this.translateService.instant('CATEGORIAS.DETAIL.TITULO_VER');
     }
   }
 
@@ -115,6 +116,17 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   editarRegistro() {
     this.displayNuevo = true;
     this.cambioTextoModal('E');
+    this.categoriaService.getCategoriaById(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
+      .subscribe((categoria: Categoria) => {
+        this.registroCategoria = categoria;
+        this.gestionarDtoToReactiveForm();
+      });
+  }
+
+  verRegistro() {
+    this.displayNuevo = true;
+    this.view = true;
+    this.cambioTextoModal('V');
     this.categoriaService.getCategoriaById(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
       .subscribe((categoria: Categoria) => {
         this.registroCategoria = categoria;
@@ -173,12 +185,9 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
             this.registroSeleccionado = null;
           });
       },
-      reject: () => { }
+      reject: () => {
+      }
     });
-  }
-
-  verRegistro() {
-
   }
 
   filtrar() {
@@ -188,5 +197,11 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   resetFiltros() {
     this.filtro = new CategoriaFilter();
     this.actualizarRegistrosTabla();
+  }
+
+  cerrarPopUp() {
+    this.displayNuevo = false;
+    this.view = false;
+    this.nuevaCategoriaForm.reset();
   }
 }

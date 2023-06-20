@@ -68,19 +68,20 @@
                         [page]="page" [selectedColumnsCategoria]="selectedColumnsCategoria">
   </app-categorias-table>
 
-  <p-confirmDialog icon="pi pi-exclamation-triangle" acceptLabel="Sí" rejectLabel="No" appendTo="body">
+  <p-confirmDialog acceptLabel="{{ 'COMUN.ACCION.SI' | translate }}" appendTo="body" icon="pi pi-exclamation-triangle"
+                   rejectLabel="{{ 'COMUN.ACCION.NO' | translate }}">
   </p-confirmDialog>
 
   <!-- Formulario de registro y actualización -->
   <p-dialog [(visible)]="displayNuevo" [focusTrap]="false" [responsive]="true" [style]="{ width: '50em',
-  minWidth: '35em', maxHeight: '95%'}" appendTo="body" modal="true" positionTop="10">
+  minWidth: '35em', maxHeight: '95%'}" appendTo="body" modal="true" positionTop="10" (onHide)="cerrarPopUp()" >
     <p-fieldset>
       <p-header style="margin-left: -15px">
         {{textoTituloNuevoEditar}}
       </p-header>
       <div [formGroup]="nuevaCategoriaForm">
         <div class="ui-g ui-fluid">
-            <div class="ui-g-12 ui-md-12 pd_top_1">
+          <div class="ui-g-12 ui-md-12 pd_top_1">
               <span class="ui-float-label">
                 <input formControlName="nombre" id="nombre" maxlength="100" minlength="1" pInputText
                        type="text">
@@ -88,24 +89,37 @@
                   <font color="red">*</font>
                 </label>
               </span>
-            </div>
-            <div class="ui-g-12 ui-md-12">
+          </div>
+          <div class="ui-g-12 ui-md-12">
               <span class="ui-float-label">
-                <p-checkbox formControlName="vigencia" [binary]="true"
+                <p-checkbox [binary]="true" formControlName="vigencia"
                             label="{{ 'CATEGORIAS.DETAIL.VIGENCIA_CATEGORIA' | translate }}" name="verInactivos">
                 </p-checkbox>
               </span>
-            </div>
+          </div>
         </div>
         <div class="ui-g ui-fluid">
           <div *ngIf="!view" class="pd-top-2" fxLayoutAlign="center">
-            <button id="createRegistro" (click)="createUpdateRegistro()"
-                      [disabled]="!nuevaCategoriaForm.valid" pButton icon="pi pi-check"
-                      label="{{textoBotonNuevoEditar}}" class="ui-button" style="margin-left: 7%">
+            <button (click)="createUpdateRegistro()" [disabled]="!nuevaCategoriaForm.valid"
+                    class="ui-button" icon="pi pi-check" id="createRegistro"
+                    label="{{textoBotonNuevoEditar}}" pButton style="margin-left: 7%">
             </button>
-            <button type="button" pButton icon="pi pi-times" (click)="displayNuevo = false"
-                    label="{{ 'CATEGORIAS.DETAIL.CANCELAR_CATEGORIA' | translate }}" class="ui-button ui-button-secondary"
-                    style="margin-left: 5%">
+            <button (click)="displayNuevo = false" class="ui-button ui-button-secondary" icon="pi pi-times"
+                    label="{{ 'CATEGORIAS.DETAIL.CANCELAR_CATEGORIA' | translate }}"
+                    pButton
+                    style="margin-left: 5%"
+                    type="button">
+            </button>
+          </div>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div *ngIf="view" class="pd-top-2" fxLayoutAlign="end">
+            <button (click)="displayNuevo = false;
+            this.nuevaCategoriaForm.reset(); this.view = false;" class="ui-button ui-button-secondary"
+                    icon="pi pi-times" label="{{ 'CATEGORIAS.DETAIL.CANCELAR_CATEGORIA' | translate }}"
+                    pButton
+                    style="margin-left: 5%"
+                    type="button">
             </button>
           </div>
         </div>
