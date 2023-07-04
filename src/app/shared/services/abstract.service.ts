@@ -40,12 +40,4 @@ export abstract class AbstractService {
     return page;
   }
 
-  protected gestionarPage2<T>(response: GenericResponse<T>, constructor: { new(parameters?: any): T; }): GenericResponse<T> {
-    if (response && response.body) {
-      response.body.content = this.gestionarArray(response.body.content, constructor);
-    }
-    return response;
-  }
-
-
 }

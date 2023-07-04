@@ -11,9 +11,13 @@ import {map} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
 import {AppConstants} from '../../../../shared/utils/app.constants';
 import {GenericResponse} from '../../../shared/models/generic-response';
+import {HttpHeaders} from '@angular/common/http';
+import {DocumentoAlmacenado} from '../../../shared/models/documento-almacenado';
 @Injectable()
 export class CategoriaService extends AbstractService {
   private endpoint: string = environment.apiUrl + AppConstants.CATEGORIA_MAIN;
+  private endpointDA: string = environment.apiUrl + AppConstants.DOCUMENTO_ALMACENADO;
+
 
   constructor(private http: HttpClientPaginationService,
               private translateService: TranslateService) {
@@ -60,6 +64,13 @@ export class CategoriaService extends AbstractService {
 
   desactivar(categoriaId: number): Observable<any> {
     return this.http.get(`${this.endpoint}/desactivar/${categoriaId}`);
+  }
+
+  guardarImagen(formData: FormData): Observable<GenericResponse<DocumentoAlmacenado>> {
+    const headers = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    return this.http.post<GenericResponse<DocumentoAlmacenado>>(this.endpointDA, formData, {headers}).pipe(
+      map(response => new GenericResponse(response)));
   }
 
 }

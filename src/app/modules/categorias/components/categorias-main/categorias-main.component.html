@@ -97,6 +97,11 @@
                 </p-checkbox>
               </span>
           </div>
+          <div class="ui-g-12 ui-md-12">
+            <p-fileUpload name="file[]" accept="image/*" maxFileSize="2000000" [showUploadButton]="false" [showCancelButton]="false"
+                          (onSelect)="onFileSelect($event)">
+            </p-fileUpload>
+          </div>
         </div>
         <div class="ui-g ui-fluid">
           <div *ngIf="!view" class="pd-top-2" fxLayoutAlign="center">

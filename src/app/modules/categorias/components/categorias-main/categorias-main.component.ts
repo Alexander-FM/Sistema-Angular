@@ -11,6 +11,8 @@ import {takeUntil} from 'rxjs/operators';
 import {GenericResponse} from '../../../../shared/models/generic-response';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationService} from 'primeng-lts/api';
+import {FileUpload} from 'primeng-lts/fileupload';
+import {DocumentoAlmacenado} from '../../../../shared/models/documento-almacenado';
 
 @Component({
   selector: 'app-categorias-main',
@@ -37,7 +39,8 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     vigencia: ['', '']
   });
   registroCategoria: Categoria;
-
+  selectedFile: File;
+  formData = new FormData();
   constructor(
     protected translateService: TranslateService,
     protected categoriaService: CategoriaService,
@@ -142,15 +145,32 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     this.registroCategoria = new Categoria(this.nuevaCategoriaForm.value);
   }
 
+  private guardarDatosImagen() {
+    this.formData.append('nombre', this.selectedFile.name); // Especifica el valor del nombre
+    this.formData.append('file', this.selectedFile, this.selectedFile.name); // Agrega el archivo seleccionado al FormData
+  }
+
   createUpdateRegistro() {
     this.gestionarReactiveFormToDto();
     this.displayNuevo = false;
     if (this.estadoModal === 'N') {
-      this.categoriaService.create(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
-        this.registroCategoria.id = e;
-        this.actualizarRegistrosTabla();
-        this.registroCategoria = new Categoria();
-      });
+      this.guardarDatosImagen();
+      // Primero registramos la imagen, para luego asignarle a la categoría
+      this.categoriaService.guardarImagen(this.formData).subscribe((response: GenericResponse<DocumentoAlmacenado>) => {
+          console.log('Respuesta del servidor:', response);
+          // Asignamos el valor de la respuesta del body al atributo foto que está en el objeto Categoría.
+          this.registroCategoria.foto = response.body;
+          this.categoriaService.create(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
+            this.registroCategoria.id = e;
+            this.actualizarRegistrosTabla();
+            this.registroCategoria = new Categoria();
+          });
+        },
+        (error) => {
+          console.error('Error al enviar la imagen:', error);
+          // Maneja el error de manera apropiada
+        }
+      );
     } else {
       this.categoriaService.update(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
         this.registroCategoria.id = e;
@@ -227,5 +247,12 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     this.displayNuevo = false;
     this.view = false;
     this.nuevaCategoriaForm.reset();
+  }
+
+  onFileSelect(event: any) {
+    console.log('Archivo seleccionado:', event);
+
+    this.selectedFile = event.files[0];
+    console.log('Archivo seleccionado:', this.selectedFile);
   }
 }

@@ -1,10 +1,12 @@
 import {Util} from '../../../shared/utils/utils';
+import {DocumentoAlmacenado} from './documento-almacenado';
 
 export interface Categoria {
   id?: number;
   nombre: string;
   vigencia: boolean;
   vigenciaString: string;
+  foto: DocumentoAlmacenado;
   // tslint:disable-next-line:no-misused-new
   new(parameters?: any): Categoria;
 }
@@ -18,7 +20,8 @@ export class Categoria {
       id: this.id ? this.id : null,
       nombre: this.nombre ? this.nombre : null,
       vigencia: this.vigencia ? this.vigencia : null,
-      vigenciaString: this.vigenciaString ? this.vigenciaString : null
+      vigenciaString: this.vigenciaString ? this.vigenciaString : null,
+      foto: this.foto ? this.foto : null
     };
   }
 }
