@@ -111,6 +111,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   }
 
   nuevoRegistro() {
+    this.selectedFile = null;
     this.displayNuevo = true;
     this.cambioTextoModal('N');
     this.nuevaCategoriaForm.reset();
@@ -247,6 +248,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     this.displayNuevo = false;
     this.view = false;
     this.nuevaCategoriaForm.reset();
+    this.selectedFile = null;
   }
 
   onFileSelect(event: any) {
