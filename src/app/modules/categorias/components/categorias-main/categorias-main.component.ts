@@ -112,7 +112,6 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
 
   nuevoRegistro() {
     this.selectedFile = null;
-    this.cdr.detectChanges();
     this.displayNuevo = true;
     this.cambioTextoModal('N');
     this.nuevaCategoriaForm.reset();
