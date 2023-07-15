@@ -11,7 +11,6 @@ import {takeUntil} from 'rxjs/operators';
 import {GenericResponse} from '../../../../shared/models/generic-response';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationService} from 'primeng-lts/api';
-import {FileUpload} from 'primeng-lts/fileupload';
 import {DocumentoAlmacenado} from '../../../../shared/models/documento-almacenado';
 
 @Component({
