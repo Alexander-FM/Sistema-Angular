@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CategoriaFilter} from '../../models/categoria-filter';
 import {TranslateService} from '@ngx-translate/core';
 import {AbstractComponent} from '../../../../components/shared/abstract.component';
@@ -44,9 +44,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     protected translateService: TranslateService,
     protected categoriaService: CategoriaService,
     protected fb: FormBuilder,
-    protected confirmationService: ConfirmationService,
-    private cdr: ChangeDetectorRef
-  ) {
+    protected confirmationService: ConfirmationService) {
     super(translateService);
   }
 
@@ -249,8 +247,6 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     this.view = false;
     this.nuevaCategoriaForm.reset();
     this.selectedFile = null;
-    this.cdr.detectChanges();
-
   }
 
   onFileSelect(event: any) {
