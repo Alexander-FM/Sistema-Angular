@@ -61,7 +61,6 @@ import { ToastModule } from 'primeng-lts/toast';
     ConfirmDialogModule,
     CheckboxModule,
     KeyFilterModule,
-    MultiSelectModule,
     TooltipModule,
     FileUploadModule,
     DialogModule,

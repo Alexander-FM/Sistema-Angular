@@ -251,7 +251,6 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
 
   onFileSelect(event: any) {
     console.log('Archivo seleccionado:', event);
-
     this.selectedFile = event.files[0];
     console.log('Archivo seleccionado:', this.selectedFile);
   }
