@@ -156,7 +156,8 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
 
   private getImagenUrl(fileName: string): string {
     const baseUrl = 'http://localhost:9090/api/documento-almacenado/download/';
-    return baseUrl + fileName;
+    const uniqueTimestamp = new Date().getTime(); // Valor de tiempo actual como número único
+    return `${baseUrl}${fileName}?timestamp=${uniqueTimestamp}`;
   }
 
 
@@ -168,68 +169,70 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     let rellenado = false;
     if (this.selectedFile) {
       rellenado = true;
-      this.formData.append('nombre', this.selectedFile.name); // Especifica el valor del nombre
-      this.formData.append('file', this.selectedFile, this.selectedFile.name); // Agrega el archivo seleccionado al FormData
+      this.formData.delete('nombre');
+      this.formData.delete('file');
+      // const fileName = this.selectedFile.name;
+      // const fileNameWithoutExtension = fileName.split('.')[0];
+      this.formData.append('nombre', this.getFileNameWithoutExtension(this.selectedFile.name)); // Especifica el valor del nombre
+      this.formData.append('file', this.selectedFile); // Agrega el archivo seleccionado al FormData
     }
     return rellenado;
   }
 
+  private getFileNameWithoutExtension(filename: string): string {
+    return filename.split('.')[0];
+  }
+
   createUpdateRegistro() {
     this.gestionarReactiveFormToDto();
+    const rellenado = this.guardarDatosImagen();
     if (this.estadoModal === 'N') {
-      const rellenado = this.guardarDatosImagen();
-      if (rellenado) {
-        this.categoriaService.guardarImagen(this.formData).subscribe((response: GenericResponse<DocumentoAlmacenado>) => {
-            this.registroCategoria.foto = response.body;
-            this.categoriaService.create(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
-              this.registroCategoria.id = e;
-              this.actualizarRegistrosTabla();
-              this.registroCategoria = new Categoria();
-              this.cleanFilesFromForm();
-              this.displayNuevo = false;
-            });
-          },
-          (error) => {
-            console.error('Error al enviar la imagen:', error);
-          }
-        );
-      } else {
-        this.errores = [({
+      if (!rellenado) {
+        this.errores = [{
           severity: 'error',
           summary: this.translateService.instant('CATEGORIAS.MENSAJE_SISTEMA'),
           detail: this.translateService.instant('CATEGORIAS.ERRORES.IMAGEN_NO_RELLENADA')
-        })];
+        }];
         return true;
       }
+      this.categoriaService.guardarImagen(this.formData).subscribe((response: GenericResponse<DocumentoAlmacenado>) => {
+        this.registroCategoria.foto = response.body;
+        this.crearCategoria();
+      }, (error) => {
+        console.error('Error al enviar la imagen:', error);
+      });
     } else {
-      const rellenado = this.guardarDatosImagen();
       if (rellenado) {
         this.categoriaService.actualizarImagen(this.registroSeleccionado.foto.id, this.formData)
           .subscribe((response: GenericResponse<DocumentoAlmacenado>) => {
-              this.registroCategoria.foto = response.body;
-              this.categoriaService.update(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
-                this.registroCategoria.id = e;
-                this.actualizarRegistrosTabla();
-                this.registroCategoria = new Categoria();
-                this.cleanFilesFromForm();
-                this.displayNuevo = false;
-              });
-            },
-            (error) => {
-              console.error('Error al enviar la imagen:', error);
-            }
-          );
+            this.registroCategoria.foto = response.body;
+            this.actualizarCategoria();
+          }, (error) => {
+            console.error('Error al enviar la imagen:', error);
+          });
       } else {
         this.registroCategoria.foto = this.registroSeleccionado.foto;
-        this.categoriaService.update(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
-          this.registroCategoria.id = e;
-          this.actualizarRegistrosTabla();
-          this.registroCategoria = new Categoria();
-          this.cleanFilesFromForm();
-          this.displayNuevo = false;
-        });
+        this.actualizarCategoria();
       }
     }
+  }
+  crearCategoria() {
+    this.categoriaService.create(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
+      this.registroCategoria.id = e;
+      this.finalizarOperacion();
+    });
+  }
+  actualizarCategoria() {
+    this.registroCategoria.id = this.registroSeleccionado.id;
+    this.categoriaService.update(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
+      this.finalizarOperacion();
+    });
+  }
+  finalizarOperacion() {
+    this.registroCategoria = new Categoria();
+    this.cleanFilesFromForm();
+    this.displayNuevo = false;
+    this.actualizarRegistrosTabla();
   }
 
   actualizarRegistrosTabla() {
@@ -247,7 +250,6 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
         this.categoriaService.activar(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
           .subscribe(() => {
             this.actualizarRegistrosTabla();
-            this.registroSeleccionado = null;
           });
       },
       reject: () => {
@@ -264,7 +266,6 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
         this.categoriaService.desactivar(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
           .subscribe(() => {
             this.actualizarRegistrosTabla();
-            this.registroSeleccionado = null;
           });
       },
       reject: () => {
@@ -283,8 +284,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
             this.categoriaService.deleteImage(this.registroSeleccionado.foto.id).pipe(takeUntil(this.destroy$))
               .subscribe((response: GenericResponse<any>) => {
                 if (response.rpta === 1) {
-                  this.categoriasTable.table.reset();
-                  this.registroSeleccionado = null;
+                  this.actualizarRegistrosTabla();
                 }
               });
           });
@@ -320,7 +320,6 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   }
 
   onFileSelect(event: any) {
-    console.log('Archivo seleccionado:', event);
     this.selectedFile = event.files[0];
     console.log('Archivo seleccionado:', this.selectedFile);
     this.imagenUrl = null;
