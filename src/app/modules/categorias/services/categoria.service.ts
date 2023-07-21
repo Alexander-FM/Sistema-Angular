@@ -7,7 +7,7 @@ import {CategoriaFilter} from '../models/categoria-filter';
 import {Observable} from 'rxjs';
 import {Page} from '../../../shared/models/page';
 import {Categoria} from '../../../shared/models/categoria';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
 import {AppConstants} from '../../../../shared/utils/app.constants';
 import {GenericResponse} from '../../../shared/models/generic-response';
@@ -72,5 +72,24 @@ export class CategoriaService extends AbstractService {
     return this.http.post<GenericResponse<DocumentoAlmacenado>>(this.endpointDA, formData, {headers}).pipe(
       map(response => new GenericResponse(response)));
   }
+
+  actualizarImagen(id: number, formData: FormData): Observable<GenericResponse<DocumentoAlmacenado>> {
+    const headers = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    return this.http.put<GenericResponse<DocumentoAlmacenado>>(`${this.endpointDA}/editImage/${id}`, formData, {headers}).pipe(
+      map(response => new GenericResponse(response)));
+  }
+
+  /**
+   * Elimina una imagen mediante una solicitud HTTP DELETE al servidor.
+   *
+   * @param id El ID de la imagen que se desea eliminar.
+   * @returns Un Observable que emite un objeto GenericResponse<any> como resultado de la operación.
+   */
+  deleteImage(id: number): Observable<GenericResponse<any>> {
+    return this.http.delete(`${this.endpointDA}/deleteImage/${id}`).pipe(
+      tap((response: any) => new GenericResponse(response)));
+  }
+
 
 }

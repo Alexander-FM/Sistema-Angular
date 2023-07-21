@@ -98,8 +98,11 @@
               </span>
           </div>
           <div class="ui-g-12 ui-md-12">
-            <p-fileUpload name="file[]" accept="image/*" maxFileSize="2000000" [showUploadButton]="false" [showCancelButton]="false"
+            <p-fileUpload #fileUpload name="file[]" accept="image/*" maxFileSize="3000000" [disabled]="disabledComponent" [showUploadButton]="false" [showCancelButton]="false"
                           (onSelect)="onFileSelect($event)" chooseLabel="Cargar Imagen">
+              <ng-template pTemplate="content">
+                <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Imagen Cargada" style="max-width: 100%; max-height: 150px;">
+              </ng-template>
             </p-fileUpload>
           </div>
         </div>
@@ -109,7 +112,7 @@
                     class="ui-button" icon="pi pi-check" id="createRegistro"
                     label="{{textoBotonNuevoEditar}}" pButton style="margin-left: 7%">
             </button>
-            <button (click)="displayNuevo = false" class="ui-button ui-button-secondary" icon="pi pi-times"
+            <button (click)="cerrarPopUp()" class="ui-button ui-button-secondary" icon="pi pi-times"
                     label="{{ 'CATEGORIAS.DETAIL.CANCELAR_CATEGORIA' | translate }}"
                     pButton
                     style="margin-left: 5%"

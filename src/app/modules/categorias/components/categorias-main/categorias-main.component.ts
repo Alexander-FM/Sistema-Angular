@@ -12,6 +12,7 @@ import {GenericResponse} from '../../../../shared/models/generic-response';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ConfirmationService} from 'primeng-lts/api';
 import {DocumentoAlmacenado} from '../../../../shared/models/documento-almacenado';
+import {FileUpload} from 'primeng-lts/fileupload';
 
 @Component({
   selector: 'app-categorias-main',
@@ -21,6 +22,7 @@ import {DocumentoAlmacenado} from '../../../../shared/models/documento-almacenad
 export class CategoriasMainComponent extends AbstractComponent implements OnInit {
 
   @ViewChild('categoriasTable') categoriasTable: CategoriasTableComponent;
+  @ViewChild('fileUpload') fileUpload: FileUpload;
   page: Page<Categoria> = {} as Page<Categoria>;
   registroSeleccionado: Categoria;
   isLoading = true;
@@ -40,6 +42,8 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   registroCategoria: Categoria;
   selectedFile: File;
   formData = new FormData();
+  imagenUrl: string;
+  disabledComponent = false;
   constructor(
     protected translateService: TranslateService,
     protected categoriaService: CategoriaService,
@@ -109,10 +113,10 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
   }
 
   nuevoRegistro() {
-    this.selectedFile = null;
     this.displayNuevo = true;
     this.cambioTextoModal('N');
     this.nuevaCategoriaForm.reset();
+    this.nuevaCategoriaForm.get('vigencia').setValue(true);
   }
 
   editarRegistro() {
@@ -138,7 +142,21 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
 
   private gestionarDtoToReactiveForm() {
     this.nuevaCategoriaForm.patchValue(this.registroCategoria);
+    if (this.view) {
+      this.nuevaCategoriaForm.disable();
+      this.disabledComponent = true;
+    } else {
+      this.nuevaCategoriaForm.enable();
+      this.disabledComponent = false;
+    }
+    this.imagenUrl = this.getImagenUrl(this.registroCategoria.foto.completeFileName);
   }
+
+  private getImagenUrl(fileName: string): string {
+    const baseUrl = 'http://localhost:9090/api/documento-almacenado/download/';
+    return baseUrl + fileName;
+  }
+
 
   private gestionarReactiveFormToDto() {
     this.registroCategoria = new Categoria(this.nuevaCategoriaForm.value);
@@ -146,7 +164,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
 
   private guardarDatosImagen() {
     this.formData.append('nombre', this.selectedFile.name); // Especifica el valor del nombre
-    this.formData.append('file', this.selectedFile, this.selectedFile.name); // Agrega el archivo seleccionado al FormData
+    this.formData.append('file', this.selectedFile); // Agrega el archivo seleccionado al FormData
   }
 
   createUpdateRegistro() {
@@ -154,34 +172,42 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     this.displayNuevo = false;
     if (this.estadoModal === 'N') {
       this.guardarDatosImagen();
-      // Primero registramos la imagen, para luego asignarle a la categoría
       this.categoriaService.guardarImagen(this.formData).subscribe((response: GenericResponse<DocumentoAlmacenado>) => {
-          console.log('Respuesta del servidor:', response);
-          // Asignamos el valor de la respuesta del body al atributo foto que está en el objeto Categoría.
           this.registroCategoria.foto = response.body;
           this.categoriaService.create(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
             this.registroCategoria.id = e;
             this.actualizarRegistrosTabla();
             this.registroCategoria = new Categoria();
+            this.cleanFilesFromForm();
           });
         },
         (error) => {
           console.error('Error al enviar la imagen:', error);
-          // Maneja el error de manera apropiada
         }
       );
     } else {
-      this.categoriaService.update(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
-        this.registroCategoria.id = e;
-        this.actualizarRegistrosTabla();
-        this.registroCategoria = new Categoria();
-      });
+      this.guardarDatosImagen();
+      this.categoriaService.actualizarImagen(this.registroSeleccionado.foto.id, this.formData)
+        .subscribe((response: GenericResponse<DocumentoAlmacenado>) => {
+          this.registroCategoria.foto = response.body;
+          this.categoriaService.update(this.registroCategoria).pipe(takeUntil(this.destroy$)).subscribe((e) => {
+            this.registroCategoria.id = e;
+            this.actualizarRegistrosTabla();
+            this.registroCategoria = new Categoria();
+            this.cleanFilesFromForm();
+          });
+        },
+        (error) => {
+          console.error('Error al enviar la imagen:', error);
+        }
+      );
     }
   }
 
   actualizarRegistrosTabla() {
     this.categoriasTable.table.clearState();
     this.categoriasTable.table.reset();
+    this.registroSeleccionado = null;
   }
 
   confirmarActivarRegistro() {
@@ -192,7 +218,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
       accept: () => {
         this.categoriaService.activar(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            this.categoriasTable.table.reset();
+            this.actualizarRegistrosTabla();
             this.registroSeleccionado = null;
           });
       },
@@ -208,7 +234,7 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
       accept: () => {
         this.categoriaService.desactivar(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            this.categoriasTable.table.reset();
+            this.actualizarRegistrosTabla();
             this.registroSeleccionado = null;
           });
       },
@@ -224,11 +250,17 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
       accept: () => {
         this.categoriaService.delete(this.registroSeleccionado.id).pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            this.categoriasTable.table.reset();
-            this.registroSeleccionado = null;
+            this.categoriaService.deleteImage(this.registroSeleccionado.foto.id).pipe(takeUntil(this.destroy$))
+              .subscribe((response: GenericResponse<any>) =>  {
+              if (response.rpta === 1) {
+                this.categoriasTable.table.reset();
+                this.registroSeleccionado = null;
+              }
+            });
           });
       },
       reject: () => {
+        console.log('Ocurrió un error durante la eliminación');
       }
     });
   }
@@ -246,12 +278,20 @@ export class CategoriasMainComponent extends AbstractComponent implements OnInit
     this.displayNuevo = false;
     this.view = false;
     this.nuevaCategoriaForm.reset();
+    this.imagenUrl = null;
+    this.disabledComponent = false;
+    this.cleanFilesFromForm();
+  }
+
+  cleanFilesFromForm() {
     this.selectedFile = null;
+    this.fileUpload.clear();
   }
 
   onFileSelect(event: any) {
     console.log('Archivo seleccionado:', event);
     this.selectedFile = event.files[0];
     console.log('Archivo seleccionado:', this.selectedFile);
+    this.imagenUrl = null;
   }
 }
