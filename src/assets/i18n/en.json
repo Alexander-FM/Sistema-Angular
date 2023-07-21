@@ -51,6 +51,7 @@
     }
   },
   "CATEGORIAS": {
+    "MENSAJE_SISTEMA": "System message: ",
     "TITULO": "Categories",
     "FILTROS": {
       "NOMBRE_CATEGORIA": "Category",
@@ -76,6 +77,9 @@
       "ALERTA_ACTIVAR": "Are you sure to activate the category?",
       "DESACTIVAR_CATEGORIA": "Deactivate Category",
       "ALERTA_DESACTIVAR": "Are you sure to deactivate the category?"
+    },
+    "ERRORES" : {
+      "IMAGEN_NO_RELLENADA": "The image has not been specified"
     }
   }
 }
