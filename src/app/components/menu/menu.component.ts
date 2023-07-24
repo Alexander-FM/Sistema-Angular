@@ -10,6 +10,7 @@ import {environment} from '../../../environments/environment';
 })
 export class MenuComponent extends AbstractComponent {
   langs: string[] = environment.langs;
+  isLogged = !environment.login.enable;
 
   constructor(private translate: TranslateService) { super(translate);     this.translate.setDefaultLang('es');
   }

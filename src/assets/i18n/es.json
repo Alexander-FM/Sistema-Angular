@@ -50,6 +50,18 @@
       "INACTIVA": "Inactive"
     }
   },
+  "LOGIN": {
+    "FORMULARIO": {
+      "TITULO": "Iniciar sesión",
+      "USUARIO": "Usuario",
+      "PASSWORD": "Password",
+      "SALUDO": "Hola, identifíquese para iniciar sesión."
+    },
+    "BOTONERA": {
+      "INICIAR_SESSION": "Iniciar Sesión",
+      "CERRAR_SESSION": "Cerrar Sesión"
+    }
+  },
   "CATEGORIAS": {
     "MENSAJE_SISTEMA": "Mensaje del sistema: ",
     "TITULO": "Categorías",

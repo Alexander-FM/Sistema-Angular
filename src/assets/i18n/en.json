@@ -50,6 +50,18 @@
       "INACTIVA": "Inactive"
     }
   },
+  "LOGIN": {
+    "FORMULARIO": {
+      "TITULO": "Login",
+      "USUARIO": "User",
+      "PASSWORD": "Password",
+      "SALUDO": "Hello, please identify yourself to log in."
+    },
+    "BOTONERA": {
+      "INICIAR_SESSION": "Login Session",
+      "CERRAR_SESSION": "Logout"
+    }
+  },
   "CATEGORIAS": {
     "MENSAJE_SISTEMA": "System message: ",
     "TITULO": "Categories",
