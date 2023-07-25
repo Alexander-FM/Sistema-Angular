@@ -3,7 +3,7 @@ import {Rol} from './rol';
 
 export interface Empleado {
   id?: number;
-  nombres: string;
+  nombre: string;
   apellidos: string;
   vigencia: boolean;
   vigenciaString: string;
@@ -19,7 +19,7 @@ export class Empleado {
   convertEmpleado() {
     return {
       id: this.id ? this.id : null,
-      nombres: this.nombres ? this.nombres : null,
+      nombres: this.nombre ? this.nombre : null,
       apellidos: this.apellidos ? this.apellidos : null,
       vigencia: this.vigencia ? this.vigencia : null,
       vigenciaString: this.vigenciaString ? this.vigenciaString : null,

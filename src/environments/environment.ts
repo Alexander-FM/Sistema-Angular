@@ -7,10 +7,7 @@ import {common} from './common';
 export const environment = {
   ...common,
   apiUrl: 'http://localhost:9090/api/',
-  production: false,
-  login: {
-    enable: false
-  }
+  production: false
 };
 
 /*

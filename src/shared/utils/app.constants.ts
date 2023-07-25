@@ -6,6 +6,7 @@
 export class AppConstants {
   public static readonly CATEGORIA_MAIN: string = 'categoria';
   public static readonly DOCUMENTO_ALMACENADO: string = 'documento-almacenado';
+  public static readonly LOGIN_MAIN: string = 'user';
 
   private constructor() { }
 }
