@@ -20,13 +20,13 @@ export class MenuComponent extends AbstractComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    /**
+     * @description Detecta cambios en el estado de autenticación y asigna el valor a la variable isLogged para
+     * determinar si se debe mostrar el menú o no
+     */
     this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isLogged = isAuthenticated;
     });
-  }
-
-  clearSessionStorage() {
-    sessionStorage.clear();
   }
 
   setLang(lang: string) {
