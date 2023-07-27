@@ -27,13 +27,6 @@ export class MenuComponent extends AbstractComponent implements OnInit {
      * determinar si se debe mostrar el menú o no
      */
     this.isLogged = this.authService.getIsAuthenticated();
-
-    /*this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
-      this.isLogged = isAuthenticated;
-      if (this.isLogged) {
-        this.user = new User(this.authService.getUserData());
-      }
-    });*/
   }
 
   setLang(lang: string) {

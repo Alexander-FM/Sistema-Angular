@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       if (response.rpta === 1 && response.body) {
         this.user = response.body;
         this.display = false;
-        this.isLogged = true;
         this.authService.setIsAuthenticated(true, this.user); // Establece el estado de autenticación a true
         this.router.navigate(['/inicio'])
           .then(r => console.log('Navegación exitosa'))
@@ -64,7 +63,6 @@ export class LoginComponent implements OnInit {
       .catch(error => console.log('Error en la navegación: ' + error));
     this.authService.setIsAuthenticated(false, null);
     this.isLogged = false;
-    this.display = true;
     this.userForm.reset();
   }
 }
