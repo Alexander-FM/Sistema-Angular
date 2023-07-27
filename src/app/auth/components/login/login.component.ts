@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {AbstractComponent} from '../../../components/shared/abstract.component';
 import {TranslateService} from '@ngx-translate/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   display = true;
   isLogged = false;
   user: User;
@@ -26,6 +26,11 @@ export class LoginComponent {
     protected authService: AuthService,
     private router: Router
   ) {
+  }
+
+  ngOnInit(): void {
+    this.isLogged = this.authService.getIsAuthenticated();
+    this.user = new User(this.authService.getUserData());
   }
 
   private gestionarReactiveFormToDto() {
@@ -53,8 +58,7 @@ export class LoginComponent {
   }
 
   cerrar() {
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('userData');
+    localStorage.clear();
     this.router.navigate(['/auth'])
       .then(r => console.log('La navegación fue exitosa y se cerró la session'))
       .catch(error => console.log('Error en la navegación: ' + error));
