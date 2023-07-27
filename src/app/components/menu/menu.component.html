@@ -1,14 +1,14 @@
 <div class="container-header">
   <mat-toolbar class="header">
     <a href="https://www.gva.es/va/inicio/presentacion" target="_blank">
-      <img src="assets/images/logo.png" height="50">
+      <img height="50" src="assets/images/logo.png">
     </a>
     <div class="linea-roja-separacion"></div>
     <div class="width-0-5em"></div>
-    <span fxShow="true" fxFlex class="two-lines">
-      {{ 'MENU.AMBITO' | translate }}<br />
+    <span class="two-lines" fxFlex fxShow="true">
+      {{ 'MENU.AMBITO' | translate }}<br/>
     </span>
-    <div fxFlex class="header-app-nom">
+    <div class="header-app-nom" fxFlex>
       <a class="color-rojo" href="/"> {{ 'TITLE' | translate }}</a>
     </div>
   </mat-toolbar>
@@ -16,26 +16,27 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">SISTVENT</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-bs-target="#navbarNavDropdown" data-bs-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul *ngIf="isLogged" class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/inicio" routerLinkActive="active"
-             [routerLinkActiveOptions]="{ exact: true }">
+          <a [routerLinkActiveOptions]="{ exact: true }" class="nav-link" routerLink="/inicio"
+             routerLinkActive="active">
             {{ 'MENU.NAVBAR.INICIO' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/categorias" routerLinkActive="active"
-             [routerLinkActiveOptions]="{ exact: true }">
+          <a [routerLinkActiveOptions]="{ exact: true }" class="nav-link" routerLink="/categorias"
+             routerLinkActive="active">
             {{ 'MENU.NAVBAR.CATEGORIA' | translate }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">{{ 'MENU.NAVBAR.PRODUCTOS' | translate }}</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
             {{ 'MENU.MANTENIMIENTO.MANTENIMIENTO' | translate }}
           </a>
           <ul class="dropdown-menu">
@@ -47,32 +48,39 @@
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
             {{ 'MANUAL.TITLE' | translate }}
             <i class="bi bi-file-earmark-pdf"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_USER' | translate }}<img src="assets/images/pdf.png" alt="Manual PDF" class="icono-personalizado"></a></li>
-            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_INC' | translate }}<img src="assets/images/pdf.png" alt="Manual PDF" class="icono-personalizado"></a></li>
+            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_USER' | translate }}<img alt="Manual PDF"
+                                                                                        class="icono-personalizado"
+                                                                                        src="assets/images/pdf.png"></a>
+            </li>
+            <li><a class="dropdown-item" href="#">{{ 'MANUAL.M_INC' | translate }}<img alt="Manual PDF"
+                                                                                       class="icono-personalizado"
+                                                                                       src="assets/images/pdf.png"></a>
+            </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
             {{ 'LANG.TITLE' | translate }}
             <i class="bi bi-translate"></i></a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" *ngFor="let lang of langs" (click)="setLang(lang)">
-              {{ 'LANG.'+(lang | uppercase) | translate }}
+            <li><a (click)="setLang(lang)" *ngFor="let lang of langs" class="dropdown-item">
+              {{ 'LANG.' + (lang | uppercase) | translate }}
               <ng-container *ngIf="lang === 'es'" class="icono-container">
-                <img src="assets/images/spain.png" alt="Icono ES" class="icono-personalizado">
+                <img alt="Icono ES" class="icono-personalizado" src="assets/images/spain.png">
               </ng-container>
               <ng-container *ngIf="lang === 'en'" class="icono-container">
-                <img src="assets/images/united-states.png" alt="Icono EN" class="icono-personalizado">
-              </ng-container></a></li>
+                <img alt="Icono EN" class="icono-personalizado" src="assets/images/united-states.png">
+              </ng-container>
+            </a></li>
           </ul>
         </li>
-        <app-login></app-login>
       </ul>
+      <app-login></app-login>
     </div>
   </div>
 </nav>

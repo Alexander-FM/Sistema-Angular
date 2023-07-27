@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent extends AbstractComponent implements OnInit {
+export class LoginComponent {
   display = true;
   isLogged = false;
   user: User;
@@ -22,27 +22,14 @@ export class LoginComponent extends AbstractComponent implements OnInit {
   });
 
   constructor(
-    protected translateService: TranslateService,
     protected fb: FormBuilder,
     protected authService: AuthService,
     private router: Router
   ) {
-    super(translateService);
   }
 
   private gestionarReactiveFormToDto() {
     this.user = new User(this.userForm.value);
-  }
-
-  ngOnInit(): void {
-    /**
-     * @description obtiene el estado de autenticación del usuario y luego asignarle a la variable isLogged.
-     * con esto se mostrará o no el pop-up de login.
-     */
-    this.isLogged = this.authService.getIsAuthenticated();
-    if (this.isLogged) {
-      this.user = new User(this.authService.getUserData());
-    }
   }
 
   validar() {

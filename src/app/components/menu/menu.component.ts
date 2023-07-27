@@ -3,6 +3,7 @@ import {AbstractComponent} from '../shared/abstract.component';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../../auth/services/auth.service';
+import {User} from '../../auth/models/usuario';
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +13,7 @@ import {AuthService} from '../../auth/services/auth.service';
 export class MenuComponent extends AbstractComponent implements OnInit {
   langs: string[] = environment.langs;
   isLogged = false;
+  user: User;
 
 
   constructor(private translate: TranslateService, private authService: AuthService) {
@@ -26,6 +28,9 @@ export class MenuComponent extends AbstractComponent implements OnInit {
      */
     this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
       this.isLogged = isAuthenticated;
+      if (this.isLogged) {
+        this.user = new User(this.authService.getUserData());
+      }
     });
   }
 

@@ -15,7 +15,7 @@ export class AuthService extends AbstractService {
   private isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
   private readonly AUTH_KEY = 'isAuthenticated';
-  private readonly USER_DATA_KEY  = 'userData';
+  private readonly USER_DATA_KEY = 'userData';
 
   constructor(private http: HttpClientPaginationService) {
     super();
