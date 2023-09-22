@@ -13,7 +13,6 @@ import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {AuthModule} from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import {AuthModule} from './auth/auth.module';
     FlexLayoutModule,
     MatIconModule,
     MatSnackBarModule,
-    AuthModule.forRoot(),
   ],
   providers: [
   ],

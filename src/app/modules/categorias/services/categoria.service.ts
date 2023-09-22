@@ -13,10 +13,13 @@ import {AppConstants} from '../../../../shared/utils/app.constants';
 import {GenericResponse} from '../../../shared/models/generic-response';
 import {HttpHeaders} from '@angular/common/http';
 import {DocumentoAlmacenado} from '../../../shared/models/documento-almacenado';
+import {User} from '../../../shared/models/usuario';
+
 @Injectable()
 export class CategoriaService extends AbstractService {
   private endpoint: string = environment.apiUrl + AppConstants.CATEGORIA_MAIN;
   private endpointDA: string = environment.apiUrl + AppConstants.DOCUMENTO_ALMACENADO;
+  private endpointLogin: string = environment.apiUrl + AppConstants.LOGIN_MAIN;
 
 
   constructor(private http: HttpClientPaginationService,
@@ -91,5 +94,9 @@ export class CategoriaService extends AbstractService {
       tap((response: any) => new GenericResponse(response)));
   }
 
+  login(user: User): Observable<GenericResponse<User>> {
+    user = user.convertUser() as unknown as User;
+    return this.http.post<GenericResponse<User>>(`${this.endpointLogin}/login`, user);
+  }
 
 }
