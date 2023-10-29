@@ -7,7 +7,7 @@ import {Message, MessageService} from 'primeng-lts/api';
   templateUrl: './inicio-main.component.html',
   styleUrls: ['./inicio-main.component.css']
 })
-export class InicioMainComponent implements OnInit, OnDestroy {
+export class InicioMainComponent implements OnInit {
   mostrar = false;
   user: string;
 
@@ -39,7 +39,4 @@ export class InicioMainComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    this.webSocketService.disconnect();
-  }
 }
