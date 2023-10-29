@@ -1,3 +1,11 @@
-<p>
-  inicio-main works!
-</p>
+<div class="panel-container">
+  <div class="card" *ngIf="mostrar">
+    <img src="assets/images/pedido.png" width="100" height="100" alt="Imagen" />
+    <div class="card-content">
+      <h2>¡Nuevo pedido registrado!</h2>
+      <p>El usuario {{user}} ha realizado un pedido desde el aplicativo móvil.</p>
+    </div>
+  </div>
+  <p-toast [showTransitionOptions]="'300ms'" [hideTransitionOptions]="'500ms'" position="top-right"></p-toast>
+</div>
+
