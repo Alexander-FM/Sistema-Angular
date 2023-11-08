@@ -1,11 +1,110 @@
 <div class="panel-container">
-  <div class="card" *ngIf="mostrar">
-    <img src="assets/images/pedido.png" width="100" height="100" alt="Imagen" />
-    <div class="card-content">
+  <div *ngIf="mostrar" class="card card-inicio">
+    <img alt="Imagen" height="100" src="assets/images/pedido.png" width="100"/>
+    <div class="card-content-inicio">
       <h2>¡Nuevo pedido registrado!</h2>
       <p>El usuario {{user}} ha realizado un pedido desde el aplicativo móvil.</p>
     </div>
   </div>
-  <p-toast [showTransitionOptions]="'300ms'" [hideTransitionOptions]="'500ms'" position="top-right"></p-toast>
+  <p-toast [hideTransitionOptions]="'500ms'" [showTransitionOptions]="'300ms'" position="top-right"></p-toast>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- DIRECT CHAT -->
+      <div class="card direct-chat direct-chat-primary">
+        <div class="card-header">
+          <h3 class="card-title">Chats Using Web Sockets - Alexander Fuentes</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <!-- Conversations are loaded here -->
+          <div class="direct-chat-messages">
+            <!-- Message. Default to the left -->
+            <div *ngFor="let mensajeFromService of messagesForAlexander"
+                 [ngClass]="mensajeFromService.sender === 'Alexander Fuentes' ? '' : 'right'"
+                 class="direct-chat-msg">
+              <div class="direct-chat-infos clearfix">
+                <span [ngClass]="mensajeFromService.sender === 'Alexander Fuentes' ? 'float-left' : 'float-right'"
+                      class="direct-chat-name">{{mensajeFromService.sender}}</span>
+                <span [ngClass]="mensajeFromService.sender === 'Alexander Fuentes' ? 'float-right' : 'float-left'"
+                      class="direct-chat-timestamp">23 Jan 2:00 pm</span>
+              </div>
+              <!-- /.direct-chat-infos -->
+              <img *ngIf="mensajeFromService" alt="message user image" class="direct-chat-img"
+                   src="{{mensajeFromService.image}}">
+              <!-- /.direct-chat-img -->
+              <div *ngIf="mensajeFromService" class="direct-chat-text">
+                {{mensajeFromService.content}}
+              </div>
+              <!-- /.direct-chat-text -->
+            </div>
+            <!-- /.direct-chat-msg -->
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer">
+            <form action="#" method="post">
+              <div class="input-group">
+                <input [(ngModel)]="messageAlexander" class="form-control" name="message"
+                       placeholder="Escribir Mensaje ..." type="text">
+                <span class="input-group-append">
+                <button (click)="sendMessageAlexander()" class="btn btn-primary" type="button">Enviar</button>
+              </span>
+              </div>
+            </form>
+          </div>
+          <!-- /.card-footer-->
+        </div>
+        <!--/.direct-chat -->
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- DIRECT CHAT -->
+      <div class="card direct-chat direct-chat-primary">
+        <div class="card-header">
+          <h3 class="card-title">Chats Using Web Sockets - Emerson Cordova</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <!-- Conversations are loaded here -->
+          <div class="direct-chat-messages">
+            <!-- Message. Default to the left -->
+            <div *ngFor="let mensajeFromService of messagesForEmerson"
+                 [ngClass]="mensajeFromService.sender === 'Emerson Cordova' ? 'right' : ''"
+                 class="direct-chat-msg">
+              <div class="direct-chat-infos clearfix">
+                  <span [ngClass]="mensajeFromService.sender === 'Emerson Cordova' ? 'float-right' : 'float-left'"
+                        class="direct-chat-name">{{mensajeFromService.sender}}</span>
+                <span [ngClass]="mensajeFromService.sender === 'Emerson Cordova' ? 'float-left' : 'float-right'"
+                      class="direct-chat-timestamp">23 Jan 2:00 pm</span>
+              </div>
+              <!-- /.direct-chat-infos -->
+              <img *ngIf="mensajeFromService" alt="message user image" class="direct-chat-img"
+                   src="{{mensajeFromService.image}}">
+              <!-- /.direct-chat-img -->
+              <div *ngIf="mensajeFromService" class="direct-chat-text">
+                {{mensajeFromService.content}}
+              </div>
+              <!-- /.direct-chat-text -->
+            </div>
+            <!-- /.direct-chat-msg -->
+          </div>
+          <!--/.direct-chat-messages-->
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <form action="#" method="post">
+            <div class="input-group">
+              <input [(ngModel)]="messageEmerson" class="form-control" name="message"
+                     placeholder="Escribir Mensaje ..." type="text">
+              <span class="input-group-append">
+                <button (click)="sendMessageEmerson()" class="btn btn-primary" type="button">Enviar</button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!--/.direct-chat -->
+    </div>
+  </div>
 </div>
 
