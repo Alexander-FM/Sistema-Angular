@@ -5,6 +5,7 @@ export interface Chat {
   receiver: string;
   content: string;
   image: string;
+  fechaHora: string;
 
   // tslint:disable-next-line:no-misused-new
   new(parameters?: any): Chat;
@@ -20,7 +21,8 @@ export class Chat {
       sender: this.sender ? this.sender : null,
       receiver: this.receiver ? this.receiver : null,
       content: this.content ? this.content : null,
-      image: this.image ? this.image : null
+      image: this.image ? this.image : null,
+      fechaHora: this.fechaHora ? this.fechaHora : null
     };
   }
 }

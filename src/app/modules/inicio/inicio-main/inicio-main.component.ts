@@ -66,6 +66,7 @@ export class InicioMainComponent implements OnInit {
     chat.content = this.messageAlexander;
     chat.image = 'assets/images/alexanderProfile.jpg';
     chat.receiver = 'Emerson';
+    chat.fechaHora = this.formatDateTime(new Date());
     this.messagesForAlexander.push(chat);
     this.chatWebSocketService.sendMessage(chat);
     this.messageAlexander = '';
@@ -77,8 +78,14 @@ export class InicioMainComponent implements OnInit {
     chat.content = this.messageEmerson;
     chat.image = 'assets/images/emersonProfile.jpeg';
     chat.receiver = 'Alexander';
+    chat.fechaHora = this.formatDateTime(new Date());
     this.messagesForEmerson.push(chat);
     this.chatWebSocketService.sendMessage(chat);
     this.messageEmerson = '';
+  }
+
+  formatDateTime(dateTime) {
+    const options = { day: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', hour12: true };
+    return dateTime.toLocaleDateString('es-ES', options);
   }
 }

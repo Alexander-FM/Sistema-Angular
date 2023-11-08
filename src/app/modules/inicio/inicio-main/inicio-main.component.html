@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-6">
       <!-- DIRECT CHAT -->
-      <div class="card direct-chat direct-chat-primary">
+      <div class="card direct-chat direct-chat-success">
         <div class="card-header">
           <h3 class="card-title">Chats Using Web Sockets - Alexander Fuentes</h3>
         </div>
@@ -20,13 +20,13 @@
           <div class="direct-chat-messages">
             <!-- Message. Default to the left -->
             <div *ngFor="let mensajeFromService of messagesForAlexander"
-                 [ngClass]="mensajeFromService.sender === 'Alexander Fuentes' ? '' : 'right'"
+                 [ngClass]="mensajeFromService.sender === 'Alexander Fuentes' ? 'right' : ''"
                  class="direct-chat-msg">
               <div class="direct-chat-infos clearfix">
-                <span [ngClass]="mensajeFromService.sender === 'Alexander Fuentes' ? 'float-left' : 'float-right'"
-                      class="direct-chat-name">{{mensajeFromService.sender}}</span>
                 <span [ngClass]="mensajeFromService.sender === 'Alexander Fuentes' ? 'float-right' : 'float-left'"
-                      class="direct-chat-timestamp">23 Jan 2:00 pm</span>
+                      class="direct-chat-name">{{mensajeFromService.sender}}</span>
+                <span [ngClass]="mensajeFromService.sender === 'Alexander Fuentes' ? 'float-left' : 'float-right'"
+                      class="direct-chat-timestamp">{{mensajeFromService.fechaHora}}</span>
               </div>
               <!-- /.direct-chat-infos -->
               <img *ngIf="mensajeFromService" alt="message user image" class="direct-chat-img"
@@ -58,7 +58,7 @@
     </div>
     <div class="col-md-6">
       <!-- DIRECT CHAT -->
-      <div class="card direct-chat direct-chat-primary">
+      <div class="card direct-chat direct-chat-success">
         <div class="card-header">
           <h3 class="card-title">Chats Using Web Sockets - Emerson Cordova</h3>
         </div>
@@ -74,7 +74,7 @@
                   <span [ngClass]="mensajeFromService.sender === 'Emerson Cordova' ? 'float-right' : 'float-left'"
                         class="direct-chat-name">{{mensajeFromService.sender}}</span>
                 <span [ngClass]="mensajeFromService.sender === 'Emerson Cordova' ? 'float-left' : 'float-right'"
-                      class="direct-chat-timestamp">23 Jan 2:00 pm</span>
+                      class="direct-chat-timestamp">{{mensajeFromService.fechaHora}}</span>
               </div>
               <!-- /.direct-chat-infos -->
               <img *ngIf="mensajeFromService" alt="message user image" class="direct-chat-img"
