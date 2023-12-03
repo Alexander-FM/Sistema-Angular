@@ -2,7 +2,6 @@ import {Util} from '../../../shared/utils/utils';
 
 export interface Chat {
   sender: string;
-  receiver: string;
   content: string;
   image: string;
   fechaHora: string;
@@ -19,7 +18,6 @@ export class Chat {
   convertChat() {
     return {
       sender: this.sender ? this.sender : null,
-      receiver: this.receiver ? this.receiver : null,
       content: this.content ? this.content : null,
       image: this.image ? this.image : null,
       fechaHora: this.fechaHora ? this.fechaHora : null

@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WebSocket} from '../../../shared/services/webSocket';
-import {Message, MessageService} from 'primeng-lts/api';
+import {MessageService} from 'primeng-lts/api';
 import {ChatWebSocket} from '../../../shared/services/chatWebSocket';
 import {Chat} from '../../../shared/models/chat';
 
@@ -14,8 +14,10 @@ export class InicioMainComponent implements OnInit {
   user: string;
   messageAlexander = '';
   messageEmerson = '';
+  messageWilson = '';
   messagesForAlexander: Chat[] = [];
   messagesForEmerson: Chat[] = [];
+  messagesForWilson: Chat[] = [];
 
   constructor(protected webSocketService: WebSocket,
               protected chatWebSocketService: ChatWebSocket,
@@ -52,10 +54,13 @@ export class InicioMainComponent implements OnInit {
       });
       if (data.sender === 'Alexander Fuentes') {
         this.messagesForEmerson.push(data);
-        console.log(this.messagesForEmerson);
+        this.messagesForWilson.push(data);
       } else if (data.sender === 'Emerson Cordova') {
         this.messagesForAlexander.push(data);
-        console.log(this.messagesForAlexander);
+        this.messagesForWilson.push(data);
+      } else {
+        this.messagesForAlexander.push(data);
+        this.messagesForEmerson.push(data);
       }
     });
   }
@@ -65,7 +70,6 @@ export class InicioMainComponent implements OnInit {
     chat.sender = 'Alexander Fuentes';
     chat.content = this.messageAlexander;
     chat.image = 'assets/images/alexanderProfile.jpg';
-    chat.receiver = 'Emerson';
     chat.fechaHora = this.formatDateTime(new Date());
     this.messagesForAlexander.push(chat);
     this.chatWebSocketService.sendMessage(chat);
@@ -77,15 +81,25 @@ export class InicioMainComponent implements OnInit {
     chat.sender = 'Emerson Cordova';
     chat.content = this.messageEmerson;
     chat.image = 'assets/images/emersonProfile.jpeg';
-    chat.receiver = 'Alexander';
     chat.fechaHora = this.formatDateTime(new Date());
     this.messagesForEmerson.push(chat);
     this.chatWebSocketService.sendMessage(chat);
     this.messageEmerson = '';
   }
 
+  sendMessageWilson() {
+    const chat = new Chat();
+    chat.sender = 'Wilson Hernandez';
+    chat.content = this.messageWilson;
+    chat.image = 'assets/images/wilsonProfile.jpeg';
+    chat.fechaHora = this.formatDateTime(new Date());
+    this.messagesForWilson.push(chat);
+    this.chatWebSocketService.sendMessage(chat);
+    this.messageWilson = '';
+  }
+
   formatDateTime(dateTime) {
-    const options = { day: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', hour12: true };
+    const options = {day: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', hour12: true};
     return dateTime.toLocaleDateString('es-ES', options);
   }
 }

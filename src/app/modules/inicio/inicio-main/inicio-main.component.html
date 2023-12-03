@@ -8,11 +8,11 @@
   </div>
   <p-toast [hideTransitionOptions]="'500ms'" [showTransitionOptions]="'300ms'" position="top-right"></p-toast>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <!-- DIRECT CHAT -->
       <div class="card direct-chat direct-chat-success">
         <div class="card-header">
-          <h3 class="card-title">Chats Using Web Sockets - Alexander Fuentes</h3>
+          <h3 class="card-title">Chat Dev - Alexander Fuentes</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -56,11 +56,11 @@
         <!--/.direct-chat -->
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <!-- DIRECT CHAT -->
       <div class="card direct-chat direct-chat-success">
         <div class="card-header">
-          <h3 class="card-title">Chats Using Web Sockets - Emerson Cordova</h3>
+          <h3 class="card-title">Chat Dev - Emerson Cordova</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -97,6 +97,55 @@
                      placeholder="Escribir Mensaje ..." type="text">
               <span class="input-group-append">
                 <button (click)="sendMessageEmerson()" class="btn btn-primary" type="button">Enviar</button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!--/.direct-chat -->
+    </div>
+    <div class="col-md-4">
+      <!-- DIRECT CHAT -->
+      <div class="card direct-chat direct-chat-success">
+        <div class="card-header">
+          <h3 class="card-title">Chat Dev - Wilson Hernandez</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <!-- Conversations are loaded here -->
+          <div class="direct-chat-messages">
+            <!-- Message. Default to the left -->
+            <div *ngFor="let mensajeFromService of messagesForWilson"
+                 [ngClass]="mensajeFromService.sender === 'Wilson Hernandez' ? 'right' : ''"
+                 class="direct-chat-msg">
+              <div class="direct-chat-infos clearfix">
+                  <span [ngClass]="mensajeFromService.sender === 'Wilson Hernandez' ? 'float-right' : 'float-left'"
+                        class="direct-chat-name">{{mensajeFromService.sender}}</span>
+                  <span [ngClass]="mensajeFromService.sender === 'Wilson Hernandez' ? 'float-left' : 'float-right'"
+                      class="direct-chat-timestamp">{{mensajeFromService.fechaHora}}</span>
+              </div>
+              <!-- /.direct-chat-infos -->
+              <img *ngIf="mensajeFromService" alt="message user image" class="direct-chat-img"
+                   src="{{mensajeFromService.image}}">
+              <!-- /.direct-chat-img -->
+              <div *ngIf="mensajeFromService" class="direct-chat-text">
+                {{mensajeFromService.content}}
+              </div>
+              <!-- /.direct-chat-text -->
+            </div>
+            <!-- /.direct-chat-msg -->
+          </div>
+          <!--/.direct-chat-messages-->
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <form action="#" method="post">
+            <div class="input-group">
+              <input [(ngModel)]="messageWilson" class="form-control" name="message"
+                     placeholder="Escribir Mensaje ..." type="text">
+              <span class="input-group-append">
+                <button (click)="sendMessageWilson()" class="btn btn-primary" type="button">Enviar</button>
               </span>
             </div>
           </form>
