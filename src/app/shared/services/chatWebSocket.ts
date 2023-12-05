@@ -14,7 +14,7 @@ export class ChatWebSocket {
   private responseSubject = new Subject<any>(); // Utilizado para transmitir los datos recibidos desde el WebSocket a otros componentes.
   public response$ = this.responseSubject.asObservable();
 
-  webSocketEndPoint = 'http://localhost:9090/socket-chat';
+  webSocketEndPoint = 'http://localhost:9090/socket-ecommerce';
 
   connect() {
     console.log('Chat using web socket in spring boot');
