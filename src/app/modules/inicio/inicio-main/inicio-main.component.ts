@@ -41,7 +41,7 @@ export class InicioMainComponent implements OnInit {
       setTimeout(() => {
         this.mostrar = false;
         this.messageService.clear();
-      }, 8000);
+      }, 15000);
     });
   }
 
