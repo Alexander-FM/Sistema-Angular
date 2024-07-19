@@ -1,0 +1,20 @@
+.panel-container {
+  margin: 10px !important;
+}
+.card-inicio {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-inicio img {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.card-content-inicio {
+  padding: 10px;
+  margin-left: 10px;
+}
+
+/** Diseño del chat ***/
+
